@@ -5,46 +5,6 @@ PsychDefaultSetup(2);
 HideCursor();
 
 
-% 
-% % Set up the parallel port for receiving the triggers Uncomment for the real thing
-
-% config_io;
-% address = hex2dec('378');
-% outp(address, 150); %start experiment trigger
-
-
-% %%%Lista de triggers
-%  triggerStartBlock = 251; % byte to be sent (btbs) when the block starts 
-%  triggerEmpty = 0; % btbs when no trigger is to be sent
-%  tgC_NoD_HV = 11;
-%  tgC_NoD_LV = 14;
-%  tgC_DH_HV = 12;
-%  tgC_DH_LV = 15;
-%  tgC_DL_HV = 13;
-%  tgC_DL_LV = 16;
-%  tgC_arrows = 66;
-%  
-%  tgR_NoD_HV_Right = 21;tgR_NoD_HV_Left = 31;
-%  tgR_NoD_LV_Right = 24;tgR_NoD_LV_Left = 34;
-%  tgR_DH_HV_Right = 22;tgR_DH_HV_Left = 32;
-%  tgR_DH_LV_Right = 25;tgR_DH_LV_Left = 35;
-%  tgR_DL_HV_Right = 23;tgR_DL_HV_Left = 33;
-%  tgR_DL_LV_Right = 26;tgR_DL_LV_Left = 36;
-%  tgR_INC = 99;
-%  tgR_arrows = 77;
-%  
-%  tgF_NoD_HV = 41;
-%  tgF_NoD_LV = 44;
-%  tgF_DH_HV = 42;
-%  tgF_DH_LV = 45;
-%  tgF_DL_HV = 43;
-%  tgF_DL_LV = 46;
-%  tgF_arrows_OK = 88; %Best response
-%  tgF_arrows_BAD = 188; %Worst response
-%  tgF_INC = 55;
-%  
-%  tgNew_block = 111;
-
 
 % Seed the random number generator. Here we use the an older way to be
 % compatible with older systems. Newer syntax would be rng('shuffle'). Look
@@ -64,23 +24,13 @@ red = [1 0 0];
 
 
 
-% Numer of frames to wait before re-drawing
-waitframes = 1;
-
-% Open the screen
+% Open the screen wd
 [wd, windowRect] = PsychImaging('OpenWindow', screenNumber, black, [], 32, 2);
-%[wd, windowRect] = Screen('OpenWindow', screenNumber, black);
+
 
 
 % Flip to clear
 Screen('Flip', wd);
-
-% Query the frame duration
-ifi = Screen('GetFlipInterval', wd);
-
-% Interstimulus interval time in seconds and frames
-isiTimeSecs = 1;
-isiTimeFrames = round(isiTimeSecs / ifi);
 
 
 % Query the maximum priority level
@@ -93,7 +43,7 @@ topPriorityLevel = MaxPriority(wd);
 
 % 
 % 
-% 
+% Some coordinates that I might use for feedback and text on screen 
  resultText1 = screenYpixels * 0.5;  
  resultText2 = screenYpixels * 0.6;  
  resultText3 = screenYpixels * 0.7;
@@ -107,13 +57,10 @@ escapeKey = KbName('ESCAPE');
 upKey = KbName('UpArrow');
 downKey = KbName('DownArrow');
 spacebar = KbName('space');
-qKey = KbName('q');
-pKey = KbName('p');
+qKey = KbName('q'); %response for the Alien on the left
+pKey = KbName('p'); %response for the Alien on the right
 
 
-totalTrial = 0;
-nominalFrameRate = Screen('NominalFrameRate', wd);
-presSecs = [sort(repmat(1:5, 1, nominalFrameRate), 'descend') 0];
 
         Screen('TextFont', wd, 'Arial');
         Screen('TextSize', wd, 40);
@@ -135,7 +82,7 @@ feedbacktextRect4 = Screen('TextBounds', wd, 'ERROR');
 xfeedback4 = (screenXpixels / 2) - (feedbacktextRect4(3) / 2);
 yfeedback4 = (screenYpixels / 2) - (feedbacktextRect4(4) / 2);
 
-
+totalTrial = 0; 
 numBlue = 0;
 numYell = 0;
 valueBlue = 0;
@@ -145,5 +92,7 @@ diamondevaluated = 0;
 tooearly = 0;
 blockType = 3;
 AlienPosition = 0;
+
+        
 
         
