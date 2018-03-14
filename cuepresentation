@@ -1,0 +1,83 @@
+FlushEvents
+dotColor = [1 0 0];
+dotSizePix = 20;
+%Trial type selection
+
+if CurrentStim == 3;
+    centerStim = arrowstex;
+    DrawFormattedText(wd, 'The aliens seem distracted...', 'center', resultText1, white);
+    Screen('Flip', wd);
+    WaitSecs (2);
+    DrawFormattedText(wd, '3', 'center', resultText1, white);
+    Screen('Flip', wd);
+    WaitSecs (1);
+    DrawFormattedText(wd, ' ', 'center', resultText1, white);
+    Screen('Flip', wd);
+    WaitSecs (0.2);
+    DrawFormattedText(wd, '2', 'center', resultText1, white);
+    Screen('Flip', wd);
+    WaitSecs (1);
+    DrawFormattedText(wd, ' ', 'center', resultText1, white);
+    Screen('Flip', wd);
+    WaitSecs (0.2);
+    DrawFormattedText(wd, '1', 'center', resultText1, white);
+    Screen('Flip', wd);
+    WaitSecs (1);
+    DrawFormattedText(wd, ' ', 'center', resultText1, white);
+    Screen('Flip', wd);
+    WaitSecs (0.2);
+else
+    if allConditions(block, normaltrial) == 1;
+        centerStim = stim1tex;
+        CurrentStim = 1; %HV
+    elseif allConditions(block, normaltrial) == 2;
+        centerStim = stim2tex;
+        CurrentStim = 2; %LV
+    end
+end
+
+
+Screen('DrawTexture', wd, centerStim, [], rect.stim{5} ); %Draw the image
+Screen('Flip', wd); 
+% if CurrentStim == 1;%HV                    %Uncomment for the real thing
+%     if blockType == 1 %HVdevaluated (DH)
+%         outp(address, tgC_DH_HV);
+%         WaitSecs(0.001);
+%         outp(address, triggerEmpty);
+%     elseif blockType == 2 %LVdevaluated (DL)
+%         outp(address, tgC_DL_HV);
+%         WaitSecs(0.001);
+%         outp(address, triggerEmpty);
+%     elseif blockType == 3 %No devaluation (NoD)
+%         outp(address, tgC_NoD_HV);
+%         WaitSecs(0.001);
+%         outp(address, triggerEmpty);
+%     end
+% elseif CurrentStim == 2;%LV
+%     if blockType == 1%HVdevaluated (DH)
+%         outp(address, tgC_DH_LV);
+%         WaitSecs(0.001);
+%         outp(address, triggerEmpty);
+%     elseif blockType == 2%LVdevaluated (DL)
+%         outp(address, tgC_DL_LV);
+%         WaitSecs(0.001);
+%         outp(address, triggerEmpty);
+%     elseif blockType == 3 %No devaluation (NoD)
+%         outp(address, tgC_NoD_LV);
+%         WaitSecs(0.001);
+%         outp(address, triggerEmpty);
+%     end
+% elseif CurrentStim == 3;
+%     outp(address, tgC_arrows);
+%     WaitSecs(0.001);
+%     outp(address, triggerEmpty);
+% end
+tic
+while toc < 0.8
+resp = CharAvail;
+ if  resp==1
+    tooearly = 1;
+else
+    tooearly = 0;
+end
+end
