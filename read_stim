@@ -1,24 +1,39 @@
-DATA.counterBalancing = subjectCon; 
+%DATA.counterBalancing = subjectCon; 
 
-%% The image used as HV cue (column 1)%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Load cues
 if counterBalancing(subjectCon,1) == 1
-    stimLoc1 = [cd, filesep 'Images' filesep 'Image1.png'];
-    stimLoc2 = [cd, filesep 'Images' filesep 'Image2.png'];
-else
-    stimLoc1 = [cd, filesep 'Images' filesep 'Image2.png'];
-    stimLoc2 = [cd, filesep 'Images' filesep 'Image1.png'];  
+    stimCue1 = [cd, filesep 'Images' filesep 'Image1.png'];
+    stimCue2 = [cd, filesep 'Images' filesep 'Image2.png'];
+    stimCue3 = [cd, filesep 'Images' filesep 'Image3.png'];
+    stimCue4 = [cd, filesep 'Images' filesep 'Image4.png'];
+elseif counterBalancing(subjectCon,1) == 2
+    stimCue1 = [cd, filesep 'Images' filesep 'Image4.png'];
+    stimCue2 = [cd, filesep 'Images' filesep 'Image1.png'];
+    stimCue3 = [cd, filesep 'Images' filesep 'Image2.png'];
+    stimCue4 = [cd, filesep 'Images' filesep 'Image3.png'];  
+elseif counterBalancing(subjectCon,1) == 3
+    stimCue1 = [cd, filesep 'Images' filesep 'Image3.png'];
+    stimCue2 = [cd, filesep 'Images' filesep 'Image4.png'];
+    stimCue3 = [cd, filesep 'Images' filesep 'Image1.png'];
+    stimCue4 = [cd, filesep 'Images' filesep 'Image2.png'];
+elseif counterBalancing(subjectCon,1) == 4
+    stimCue1 = [cd, filesep 'Images' filesep 'Image2.png'];
+    stimCue2 = [cd, filesep 'Images' filesep 'Image3.png'];
+    stimCue3 = [cd, filesep 'Images' filesep 'Image4.png'];
+    stimCue4 = [cd, filesep 'Images' filesep 'Image1.png'];
 end
 
-stim1 = imread(stimLoc1); %High Value (+100 / 0)
-stim2 = imread(stimLoc2); %Low Value (+1 / 0)
+stimCue1im = imread(stimCue1); 
+stimCue2im = imread(stimCue2); 
+stimCue3im = imread(stimCue3); 
+stimCue4im = imread(stimCue4); 
 
-stim1tex = Screen('MakeTexture', wd, stim1);
-stim2tex = Screen('MakeTexture', wd, stim2);
+stimCue1tex = Screen('MakeTexture', wd, stimCue1im);
+stimCue2tex = Screen('MakeTexture', wd, stimCue2im);
+stimCue3tex = Screen('MakeTexture', wd, stimCue3im);
+stimCue4tex = Screen('MakeTexture', wd, stimCue4im);
 
-
-%% The image used as HV outcome (2)%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Load outcomes NOT DONE YET
 if counterBalancing(subjectCon,2) == 1
     stimLoc5 = [cd, filesep 'Images' filesep 'Diamond1.png'];%blue
     stimLoc6 = [cd, filesep 'Images' filesep 'Diamond2.png'];
