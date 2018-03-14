@@ -1,0 +1,28 @@
+%%%%There are xx different counterbalancing conditions, 4 factors (columns): The image used as HV cue (column 1), The
+%%%%image used as HV outcome (2) and the correct response position (right or left) for the HV cue (3). 
+%%%% The alien image used as HV response (4) The position of the Aliens
+%%%% will be always the green one at the left and the orange one at the
+%%%% right. 
+subjectCon = DATA.sub;
+if subjectCon > 8
+    subjectCon = rem(subjectCon, 8);
+end
+if subjectCon == 0;
+    subjectCon = 8;
+end
+counterBalancing = nan(16,4);
+  %Cookies, Diamonds, Response%%
+kk = [1,1,1;...
+      2,1,1;...
+      1,2,1;...
+      2,2,1;...
+      1,1,2;...
+      2,1,2;...
+      1,2,2;...
+      2,2,2];
+%% At random, the 4th column, which will determine the alien image to be linked with HV cue/outcome  
+kk= repmat(kk,2,1);
+for i = 1:16
+kk(i,4) = round(rand() + 1);
+end
+counterBalancing = kk;
