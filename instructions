@@ -1,0 +1,27 @@
+ Screen('DrawTexture', wd, instr1,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait;    
+
+    Screen('DrawTexture', wd, instr2,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait; 
+    
+    Screen('DrawTexture', wd, instr3,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait; 
+    
+    Screen('DrawTexture', wd, instr4,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait; 
+    
+    Screen('DrawTexture', wd, instr5,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait; 
+    
+    Screen('DrawTexture', wd, instr6,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait; 
+    
+    Screen('DrawTexture', wd, instr7,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait; 
