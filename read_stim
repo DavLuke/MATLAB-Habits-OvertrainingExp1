@@ -1,0 +1,97 @@
+DATA.counterBalancing = subjectCon; 
+
+%% The image used as HV cue (column 1)%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if counterBalancing(subjectCon,1) == 1
+    stimLoc1 = [cd, filesep 'Images' filesep 'Image1.png'];
+    stimLoc2 = [cd, filesep 'Images' filesep 'Image2.png'];
+else
+    stimLoc1 = [cd, filesep 'Images' filesep 'Image2.png'];
+    stimLoc2 = [cd, filesep 'Images' filesep 'Image1.png'];  
+end
+
+stim1 = imread(stimLoc1); %High Value (+100 / 0)
+stim2 = imread(stimLoc2); %Low Value (+1 / 0)
+
+stim1tex = Screen('MakeTexture', wd, stim1);
+stim2tex = Screen('MakeTexture', wd, stim2);
+
+
+%% The image used as HV outcome (2)%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if counterBalancing(subjectCon,2) == 1
+    stimLoc5 = [cd, filesep 'Images' filesep 'Diamond1.png'];%blue
+    stimLoc6 = [cd, filesep 'Images' filesep 'Diamond2.png'];
+else
+    stimLoc5 = [cd, filesep 'Images' filesep 'Diamond2.png'];
+    stimLoc6 = [cd, filesep 'Images' filesep 'Diamond1.png'];  
+end
+
+stim5 = imread(stimLoc5); %High Value (+100)
+stim6 = imread(stimLoc6); %Low Value (+1)
+
+stim5im = Screen('MakeTexture', wd, stim5);
+stim6im = Screen('MakeTexture', wd, stim6);
+
+%% 
+%%%%%%
+
+
+
+%%%%%consumption%%%%
+%arrows
+  stimLoc8 = [cd, filesep 'Images' filesep 'arrows.png'];%arrows in the centre
+  stim8 = imread(stimLoc8); 
+  arrowstex = Screen('MakeTexture', wd, stim8);
+  
+  
+
+
+
+%Response Options
+if counterBalancing(subjectCon,4) == 1
+    stimLoc3 = [cd, filesep 'Images' filesep 'Alien1.png'];
+    stimLoc4 = [cd, filesep 'Images' filesep 'Alien2.png'];
+else
+    stimLoc3 = [cd, filesep 'Images' filesep 'Alien2.png'];
+    stimLoc4 = [cd, filesep 'Images' filesep 'Alien1.png'];  
+end
+
+stim3 = imread(stimLoc3); 
+stim4 = imread(stimLoc4); %Low Value (+1)
+stim3im = Screen('MakeTexture', wd, stim3);
+stim4im = Screen('MakeTexture', wd, stim4);
+
+
+%Outcome = 0 diamonds
+stimLoc7 = [cd, filesep 'Images' filesep 'NoDiamond.png'];
+stim7 = imread(stimLoc7);
+stim7im = Screen('MakeTexture', wd, stim7);
+%Response Options -Angry Aliens!
+
+
+%%%%%%%Instructions%%%%%%%%%%%%%%
+
+inst1Loc = [cd, filesep 'Instructions' filesep 'instr1.JPG'];
+inst1 = imread(inst1Loc);
+instr1 = Screen('MakeTexture', wd, inst1);
+inst2Loc = [cd, filesep 'Instructions' filesep 'instr2.JPG'];
+inst2 = imread(inst2Loc);
+instr2 = Screen('MakeTexture', wd, inst2);
+inst3Loc = [cd, filesep 'Instructions' filesep 'instr3.JPG'];
+inst3 = imread(inst3Loc);
+instr3 = Screen('MakeTexture', wd, inst3);
+inst4Loc = [cd, filesep 'Instructions' filesep 'instr4.JPG'];
+inst4 = imread(inst4Loc);
+instr4 = Screen('MakeTexture', wd, inst4);
+inst5Loc = [cd, filesep 'Instructions' filesep 'instr5.JPG'];
+inst5 = imread(inst5Loc);
+instr5 = Screen('MakeTexture', wd, inst5);
+inst6Loc = [cd, filesep 'Instructions' filesep 'instr6.JPG'];
+inst6 = imread(inst6Loc);
+instr6 = Screen('MakeTexture', wd, inst6);
+inst7Loc = [cd, filesep 'Instructions' filesep 'instr7.JPG'];
+inst7 = imread(inst7Loc);
+instr7 = Screen('MakeTexture', wd, inst7);
+
+
