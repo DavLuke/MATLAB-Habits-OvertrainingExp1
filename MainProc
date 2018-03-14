@@ -13,8 +13,9 @@ currentfolder=pwd;
 % session)
 Session = 1;
 
-        DATA.sub = input('Introduce el Número del participante ---> ');
-        DATA.sub = input('Introduce el Número del participante ---> ');
+        DATA.sub = input('Introduce el número del participante ---> ');
+        DATA.ses = input('Introduce el número de sesión (1/2/3)  ---> ');
+     Session = DATA.ses;
      if Session == 1
         DATA.age = input('Please enter your age ---> ');
         DATA.sex = input ('Please enter your gender (M/F) ---> ', 's'); 
@@ -27,9 +28,9 @@ if Session ~= 1
     if exist(fileName, 'file') == 0
          button = questdlg('No existe registro de este SUJETO de la Sesión anterior. ¿Estás seguro que quieres seguir?','Duplicate subj','Yes','No','No');
          switch button
-               case 'Yes',
+               case 'Yes'
                    quit cancel;
-                case 'No',
+                case 'No'
                    return;
          end
     end
@@ -47,18 +48,20 @@ distances
 
 
 % Define the trial-by-trial matrix
-trialsxblock = 24; %%only even numbers!!!
-normalBlocks = 30;%30; %% it has be divisible by 3 (one normal block and two devaluated blocks)
-PreTrainingBlocks = 1;
+trialsxblock = 48; %%4 cues x 12 trials (I am not including free election trials here)
+normalBlocks = 8;%30; %% it has be divisible by 3 (one normal block and two devaluated blocks)
+PreTrainingBlocks = 0;
 numBlocks = normalBlocks + PreTrainingBlocks;  
 numTrials = numBlocks*trialsxblock;
-DATA.trial_data = nan(numTrials, 10); %10 is the number of columns
+DATA.trial_data = nan(numTrials, 10); %10 is the number of columns %CAUTION: Am I considering  the free election trials here?
 
 
 % Payoff
-lowPoints = 1;
+lowPoints = 5;
+mediumPoints = 10;
 highPoints = 100;
 totalPoints = 0;
+varPoints = 3; %maximum variability in points = +-varPoints.
 
 %--------------------------Table for counterbalance---------------------
 counterBalancing_script
