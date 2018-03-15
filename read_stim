@@ -1,3 +1,4 @@
+
 %DATA.counterBalancing = subjectCon; 
 
 %Load cues
@@ -33,56 +34,49 @@ stimCue2tex = Screen('MakeTexture', wd, stimCue2im);
 stimCue3tex = Screen('MakeTexture', wd, stimCue3im);
 stimCue4tex = Screen('MakeTexture', wd, stimCue4im);
 
-%Load outcomes NOT DONE YET
+%Load outcomes Important: Diamond1.png is Blue; Diamond2.png is Yellow;
+%Diamond3.png is Green
 if counterBalancing(subjectCon,2) == 1
-    stimLoc5 = [cd, filesep 'Images' filesep 'Diamond1.png'];%blue
-    stimLoc6 = [cd, filesep 'Images' filesep 'Diamond2.png'];
-else
-    stimLoc5 = [cd, filesep 'Images' filesep 'Diamond2.png'];
-    stimLoc6 = [cd, filesep 'Images' filesep 'Diamond1.png'];  
+    stimOut1 = [cd, filesep 'Images' filesep 'Diamond1.png'];%high value
+    stimOut2 = [cd, filesep 'Images' filesep 'Diamond2.png'];%medium value
+    stimOut3 = [cd, filesep 'Images' filesep 'Diamond3.png'];%low value
+elseif counterBalancing(subjectCon,2) == 2
+    stimOut1 = [cd, filesep 'Images' filesep 'Diamond3.png'];%high value
+    stimOut2 = [cd, filesep 'Images' filesep 'Diamond1.png'];%medium value
+    stimOut3 = [cd, filesep 'Images' filesep 'Diamond2.png'];%low value
+elseif counterBalancing(subjectCon,2) == 3
+    stimOut1 = [cd, filesep 'Images' filesep 'Diamond2.png'];%high value
+    stimOut2 = [cd, filesep 'Images' filesep 'Diamond3.png'];%medium value
+    stimOut3 = [cd, filesep 'Images' filesep 'Diamond1.png'];%low value
 end
 
-stim5 = imread(stimLoc5); %High Value (+100)
-stim6 = imread(stimLoc6); %Low Value (+1)
+stimOut1im = imread(stimOut1); %high value 
+stimOut2im = imread(stimOut2); %medium value
+stimOut3im = imread(stimOut3); %low value
 
-stim5im = Screen('MakeTexture', wd, stim5);
-stim6im = Screen('MakeTexture', wd, stim6);
+stimOut1tex = Screen('MakeTexture', wd, stimOut1im);%high value 
+stimOut2tex = Screen('MakeTexture', wd, stimOut2im);%high value 
+stimOut3tex = Screen('MakeTexture', wd, stimOut3im);%high value 
 
-%% 
-%%%%%%
-
-
-
-%%%%%consumption%%%%
+%load stimuli related with free consumption trials
 %arrows
-  stimLoc8 = [cd, filesep 'Images' filesep 'arrows.png'];%arrows in the centre
-  stim8 = imread(stimLoc8); 
-  arrowstex = Screen('MakeTexture', wd, stim8);
+  stimArrow = [cd, filesep 'Images' filesep 'arrows.png'];%arrows in the centre
+  stimArrowim = imread(stimArrow); 
+  arrowstex = Screen('MakeTexture', wd, stimArrowim);
   
-  
-
-
-
-%Response Options
-if counterBalancing(subjectCon,4) == 1
-    stimLoc3 = [cd, filesep 'Images' filesep 'Alien1.png'];
-    stimLoc4 = [cd, filesep 'Images' filesep 'Alien2.png'];
+%load Aliens stimuli(response options)
+if counterBalancing(subjectCon,3) == 1
+    stimAlienleft = [cd, filesep 'Images' filesep 'Alien1.png'];
+    stimAlienright = [cd, filesep 'Images' filesep 'Alien2.png'];
 else
-    stimLoc3 = [cd, filesep 'Images' filesep 'Alien2.png'];
-    stimLoc4 = [cd, filesep 'Images' filesep 'Alien1.png'];  
+    stimAlienleft = [cd, filesep 'Images' filesep 'Alien2.png'];
+    stimAlienright = [cd, filesep 'Images' filesep 'Alien1.png'];  
 end
 
-stim3 = imread(stimLoc3); 
-stim4 = imread(stimLoc4); %Low Value (+1)
-stim3im = Screen('MakeTexture', wd, stim3);
-stim4im = Screen('MakeTexture', wd, stim4);
-
-
-%Outcome = 0 diamonds
-stimLoc7 = [cd, filesep 'Images' filesep 'NoDiamond.png'];
-stim7 = imread(stimLoc7);
-stim7im = Screen('MakeTexture', wd, stim7);
-%Response Options -Angry Aliens!
+stimAlienleftim = imread(stimAlienleft); 
+stimAlienrightim = imread(stimAlienright); %Low Value (+1)
+stimAlienlefttex = Screen('MakeTexture', wd, stimAlienleftim);
+stimAlienrighttex = Screen('MakeTexture', wd, stimAlienrightim);
 
 
 %%%%%%%Instructions%%%%%%%%%%%%%%
@@ -108,5 +102,6 @@ instr6 = Screen('MakeTexture', wd, inst6);
 inst7Loc = [cd, filesep 'Instructions' filesep 'instr7.JPG'];
 inst7 = imread(inst7Loc);
 instr7 = Screen('MakeTexture', wd, inst7);
+
 
 
