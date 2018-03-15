@@ -1,89 +1,64 @@
 %for each participant/session here we stablished the order of DevH and DevM
-%blocks. 
+%blocks.
 %DevOrder = 1 means that Block 3 is a DevH, Block 4 is a DevM;
-%Block 7 would be a DevM and the eighth a DevH. 
+%Block 7 would be a DevM and the eighth a DevH.
 %DevOrder = 2 means that Block 4 is a DevH, Block 3 is a DevM;
 %Block 8 would be a DevM and the ninth a DevH.
 DevOrder = round(rand() + 1);
 
-for block = 1:numBlocks 
-   
- %blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation.
- 
-     if DevOrder == 1
-         if block == 3 || block == 8
-             blockType = 1;
-         elseif block == 4 || block == 7
-             blockType = 2;
-         else
-             blockType = 3;
-         end
-     else
-         if block == 3 || block == 8
-             blockType = 2;
-         elseif block == 4 || block == 7
-             blockType = 1;
-         else
-             blockType = 3;
-         end
-     end
-%SPACESHIPS SCREEN at the beginning of each block. It informs about what type of block is the next one:
-     DrawFormattedText(wd, ['Now have a look at your spaceships'], 'center', resultText1, white);
-     Screen('Flip', wd);
-     WaitSecs (2);
-     if blockType == 1
-         if counterBalancing(subjectCon,2) == 1
-             DrawFormattedText(wd, ['La nave para los diamantes AZULES se ha marchado a la Tierra'], 'center', resultText1, white);
-             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AZULES'], 'center', resultText2, white);
-         elseif counterBalancing(subjectCon,2) == 2
-             DrawFormattedText(wd, ['La nave para los diamantes VERDES se ha marchado a la Tierra'], 'center', resultText1, white);
-             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes VERDES'], 'center', resultText2, white);
-         elseif counterBalancing(subjectCon,2) == 3
-             DrawFormattedText(wd, ['La nave para los diamantes AMARILLOS se ha marchado a la Tierra'], 'center', resultText1, white);
-             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AMARILLOS'], 'center', resultText2, white);
-         end
-     elseif blockType == 2
-         if counterBalancing(subjectCon,2) == 1
-             DrawFormattedText(wd, ['La nave para los diamantes AMARILLOS se ha marchado a la Tierra'], 'center', resultText1, white);
-             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AMARILLOS'], 'center', resultText2, white);
-         elseif counterBalancing(subjectCon,2) == 2
-             DrawFormattedText(wd, ['La nave para los diamantes AZULES se ha marchado a la Tierra'], 'center', resultText1, white);
-             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AZULES'], 'center', resultText2, white);
-         elseif counterBalancing(subjectCon,2) == 3
-             DrawFormattedText(wd, ['La nave para los diamantes VERDES se ha marchado a la Tierra'], 'center', resultText1, white);
-             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes VERDES'], 'center', resultText2, white);
-         end
-     elseif blockType == 3
-         DrawFormattedText(wd, ['Las tres naves están disponibles'], 'center', resultText1, white);
-         DrawFormattedText(wd, ['A partir de ahora puedes quedarte los puntos de los diamantes AZUL, AMARILLO y VERDE'], 'center', resultText2, white);
-     end
-     
-        
-        if block ==1
-            DrawFormattedText(wd, ['The spaceship with the BLUE diamonds has departured for Earth'], 'center', resultText1, white);
-            DrawFormattedText(wd, ['You CANNOT keep the BLUE diamonds earned in the next block'], 'center', resultText2, white);
-            if counterBalancing(subjectCon,2) == 1 %High is the blue (devaluated)
-                blockType = 1; % HV devaluated
-            else
-                blockType = 2; % LV devaluated
-            end
-            
-        elseif rem (block,3)==2
-            diamondevaluated = 2;
-            DrawFormattedText(wd, ['The spaceship with the YELLOW diamonds has departured for Earth'], 'center', resultText1, white);
-            DrawFormattedText(wd, ['You CANNOT keep the YELLOW diamonds earned in the next block'], 'center', resultText2, white);
-            if counterBalancing(subjectCon,2) == 1 %High is the blue (nondevaluated)
-                blockType = 2;
-            elseif counterBalancing(subjectCon,2) == 2%High is the yellow (devaluated)
-                blockType = 1;
-            end
-            
-        else 
-
+for block = 1:numBlocks
+    
+    %blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation.
+    
+    if DevOrder == 1
+        if block == 3 || block == 8
+            blockType = 1;
+        elseif block == 4 || block == 7
+            blockType = 2;
+        else
+            blockType = 3;
         end
+    else
+        if block == 3 || block == 8
+            blockType = 2;
+        elseif block == 4 || block == 7
+            blockType = 1;
+        else
+            blockType = 3;
+        end
+    end
+%SPACESHIPS SCREEN at the beginning of each block. It informs about what type of block is the next one:    
+    if block > 1
+        DrawFormattedText(wd, ['Now have a look at your spaceships'], 'center', resultText1, white);
+        Screen('Flip', wd);
+        WaitSecs (2);
         
-        
-        
+        if blockType == 1
+            if counterBalancing(subjectCon,2) == 1
+                DrawFormattedText(wd, ['La nave para los diamantes AZULES se ha marchado a la Tierra'], 'center', resultText1, white);
+                DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AZULES'], 'center', resultText2, white);
+            elseif counterBalancing(subjectCon,2) == 2
+                DrawFormattedText(wd, ['La nave para los diamantes VERDES se ha marchado a la Tierra'], 'center', resultText1, white);
+                DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes VERDES'], 'center', resultText2, white);
+            elseif counterBalancing(subjectCon,2) == 3
+                DrawFormattedText(wd, ['La nave para los diamantes AMARILLOS se ha marchado a la Tierra'], 'center', resultText1, white);
+                DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AMARILLOS'], 'center', resultText2, white);
+            end
+        elseif blockType == 2
+            if counterBalancing(subjectCon,2) == 1
+                DrawFormattedText(wd, ['La nave para los diamantes AMARILLOS se ha marchado a la Tierra'], 'center', resultText1, white);
+                DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AMARILLOS'], 'center', resultText2, white);
+            elseif counterBalancing(subjectCon,2) == 2
+                DrawFormattedText(wd, ['La nave para los diamantes AZULES se ha marchado a la Tierra'], 'center', resultText1, white);
+                DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AZULES'], 'center', resultText2, white);
+            elseif counterBalancing(subjectCon,2) == 3
+                DrawFormattedText(wd, ['La nave para los diamantes VERDES se ha marchado a la Tierra'], 'center', resultText1, white);
+                DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes VERDES'], 'center', resultText2, white);
+            end
+        elseif blockType == 3
+            DrawFormattedText(wd, ['Las tres naves están disponibles'], 'center', resultText1, white);
+            DrawFormattedText(wd, ['A partir de ahora puedes quedarte los puntos de los diamantes AZUL, AMARILLO y VERDE'], 'center', resultText2, white);
+        end
         Screen('TextSize', wd, 20);
         DrawFormattedText(wd, ['Total points: ' int2str(totalPoints)],'center', resultText4, white);
         DrawFormattedText(wd, ['Press the spacebar when you are ready to continue'], 'center', resultText5, white);
@@ -98,346 +73,296 @@ for block = 1:numBlocks
         end
         fixation
         Screen('TextSize', wd, 40);
-        WaitSecs (2);
-        
-
-
+        WaitSecs (2);  %I think I have to change this
+    end
+    
+    
     % LEARNING TRIALS SCREEN
     normaltrial = 0;
- for trial = 1:trialsxblock+3; 
-    
-    respToBeMade = 1;
-    CurrentStim = 0; % Stimulus in this trial
-    totalTrial = totalTrial +1;
-   
-    pepe = 0;
-    AlienPosition = 0;
-    pepe = round(rand() + 1);
-    AlienPosition = round(rand() + 1);
-    % The position of the response which leads to HV outcome (3)%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-if AlienPosition == 1 %% The position
-    PositionHV = 1; %%Left
-    PositionLV = 2;
-else
-    PositionHV = 2; %%Right
-    PositionLV = 1;  
-end
-
-
-
-%%%%%%%%%%
-   
-    %proba proba
-
-    if trial == 7  ||  trial == 14 ||  trial == 21     
-        CurrentStim = 3;
-    else
-        normaltrial = normaltrial +1;
+    for trial = 1:trialsxblock+4
         
-    end
-
-    %Draw fixation cross  
-    fixation 
-
-  %cue presentation
-  cuepresentation
-  
-  
-
-  if tooearly ==0       
-    %Start timing        
-      tStart = GetSecs;
-    %Start response screen    
-    while respToBeMade == 1;
+        respToBeMade = 1;
+        CurrentStim = 0; % Stimulus in this trial
+        totalTrial = totalTrial +1;
         
-      %Drawing response options    
-      if CurrentStim == 3
-         if pepe == 1
-            Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left  
-            Screen('DrawTexture', wd, stim6im, [], rect.stim{4} );%Draw the low value diamond on the right
-                 Screen('Flip', wd);
-          elseif pepe == 2
-            Screen('DrawTexture', wd, stim5im, [], rect.stim{4} );%Draw the high value diamond on the right
-            Screen('DrawTexture', wd, stim6im, [], rect.stim{3} ); %Draw the low value diamond on the left
-                 Screen('Flip', wd);
-          end
-      else
-          Screen('DrawTexture', wd, stim3im, [], rect.stim{PositionHV} ); %Draw the HV response
-          Screen('DrawTexture', wd, stim4im, [], rect.stim{PositionLV} ); %Draw the LV response
-          Screen('DrawTexture', wd, centerStim, [], rect.stim{5} ); %Draw the image
-               Screen('Flip', wd);
-      end
-  
-      %Check for response 
-        [keyIsDown, secs, keyCode] = KbCheck; 
-        if keyCode (qKey); %lef hand
-            hand = 1;
-                     if CurrentStim  == 1;%HV     
-                                    if PositionHV == 1; 
-                                     points = highPoints;
-                                     response = 1;
-                                     respToBeMade = 0;
-                                    elseif PositionHV == 2;
-                                     points = 0;
-                                     response = 0;
-                                     respToBeMade = 0;
-                                    end
-
-                     elseif CurrentStim == 2;%LV 
-                                    if PositionHV == 1; 
-                                     points = 0; 
-                                     response = 0;
-                                     respToBeMade = 0;
-                                    elseif PositionHV == 2;
-                                     points = lowPoints; 
-                                     response = 1;
-                                     respToBeMade = 0;
-                                    end
-
-%                                     
-                     elseif CurrentStim == 3; %arrows 
-                                    if pepe == 1; 
-                                     points = highPoints; 
-                                     response = 3; % the HIGH points are selected
-                                     respToBeMade = 0;
-                                    elseif pepe == 2;
-                                     points = lowPoints; 
-                                     response = 4; % the LOW points are selected
-                                     respToBeMade = 0;
-                                    end  
-                     end
-        elseif keyCode(pKey);%Right
-            hand = 2;
-                     if CurrentStim  == 1;%HV     
-                                    if PositionHV == 1; 
-                                     points = 0;
-                                     response = 0;
-                                     respToBeMade = 0;
-                                    elseif PositionHV == 2;
-                                     points = highPoints;
-                                     response = 1;
-                                     respToBeMade = 0;
-                                    end
-
-                                    
-                     elseif CurrentStim == 2;%LV
-                                    if PositionHV == 1; 
-                                     points = lowPoints; 
-                                     response = 1;
-                                     respToBeMade = 0;
-                                    elseif PositionHV == 2;
-                                     points = 0; 
-                                     response = 0;
-                                     respToBeMade = 0;
-                                    end
-                                  
-                     elseif CurrentStim == 3;
-
-                                    if pepe == 1; 
-                                     points = lowPoints; 
-                                     response = 4; % the LOW points are selected
-                                     respToBeMade = 0;
-                                    elseif pepe == 2;
-                                     points = highPoints; 
-                                     response = 3; % the HIGH points are selected
-                                     respToBeMade = 0;
-                                    end                                    
-                     end
-        end                        
-   end
-    
-         
-    tEnd = GetSecs;
-    rt = tEnd - tStart;
-     
-    
-     %Draw nothing for 300 ms  
-      DrawFormattedText(wd, ' ', xCenter, yCenter, white);
-      vbl = Screen('Flip', wd);
-      WaitSecs (0.3);      
+        pepe = 0;
+        AlienPosition = 0;
+        pepe = round(rand() + 1);
+        AlienPosition = round(rand() + 1);
+        % The position of the response which leads to HV outcome (3)%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        if AlienPosition == 1 %% The position
+            PositionHV = 1; %%Left
+            PositionLV = 2;
+        else
+            PositionHV = 2; %%Right
+            PositionLV = 1;
+        end
+        
+        
+        
+        %%%%%%%%%%
+        
+        %proba proba
+        
+        if trial == 7  ||  trial == 14 ||  trial == 21
+            CurrentStim = 3;
+        else
+            normaltrial = normaltrial +1;
+            
+        end
+        
+        %Draw fixation cross
+        fixation
+        
+        %cue presentation
+        cuepresentation
+        
+        
+        
+        if tooearly ==0
+            %Start timing
+            tStart = GetSecs;
+            %Start response screen
+            while respToBeMade == 1;
+                
+                %Drawing response options
+                if CurrentStim == 3
+                    if pepe == 1
+                        Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left
+                        Screen('DrawTexture', wd, stim6im, [], rect.stim{4} );%Draw the low value diamond on the right
+                        Screen('Flip', wd);
+                    elseif pepe == 2
+                        Screen('DrawTexture', wd, stim5im, [], rect.stim{4} );%Draw the high value diamond on the right
+                        Screen('DrawTexture', wd, stim6im, [], rect.stim{3} ); %Draw the low value diamond on the left
+                        Screen('Flip', wd);
+                    end
+                else
+                    Screen('DrawTexture', wd, stim3im, [], rect.stim{PositionHV} ); %Draw the HV response
+                    Screen('DrawTexture', wd, stim4im, [], rect.stim{PositionLV} ); %Draw the LV response
+                    Screen('DrawTexture', wd, centerStim, [], rect.stim{5} ); %Draw the image
+                    Screen('Flip', wd);
+                end
+                
+                %Check for response
+                [keyIsDown, secs, keyCode] = KbCheck;
+                if keyCode (qKey); %lef hand
+                    hand = 1;
+                    if CurrentStim  == 1;%HV
+                        if PositionHV == 1;
+                            points = highPoints;
+                            response = 1;
+                            respToBeMade = 0;
+                        elseif PositionHV == 2;
+                            points = 0;
+                            response = 0;
+                            respToBeMade = 0;
+                        end
+                        
+                    elseif CurrentStim == 2;%LV
+                        if PositionHV == 1;
+                            points = 0;
+                            response = 0;
+                            respToBeMade = 0;
+                        elseif PositionHV == 2;
+                            points = lowPoints;
+                            response = 1;
+                            respToBeMade = 0;
+                        end
+                        
+                        %
+                    elseif CurrentStim == 3; %arrows
+                        if pepe == 1;
+                            points = highPoints;
+                            response = 3; % the HIGH points are selected
+                            respToBeMade = 0;
+                        elseif pepe == 2;
+                            points = lowPoints;
+                            response = 4; % the LOW points are selected
+                            respToBeMade = 0;
+                        end
+                    end
+                elseif keyCode(pKey);%Right
+                    hand = 2;
+                    if CurrentStim  == 1;%HV
+                        if PositionHV == 1;
+                            points = 0;
+                            response = 0;
+                            respToBeMade = 0;
+                        elseif PositionHV == 2;
+                            points = highPoints;
+                            response = 1;
+                            respToBeMade = 0;
+                        end
+                        
+                        
+                    elseif CurrentStim == 2;%LV
+                        if PositionHV == 1;
+                            points = lowPoints;
+                            response = 1;
+                            respToBeMade = 0;
+                        elseif PositionHV == 2;
+                            points = 0;
+                            response = 0;
+                            respToBeMade = 0;
+                        end
+                        
+                    elseif CurrentStim == 3;
+                        
+                        if pepe == 1;
+                            points = lowPoints;
+                            response = 4; % the LOW points are selected
+                            respToBeMade = 0;
+                        elseif pepe == 2;
+                            points = highPoints;
+                            response = 3; % the HIGH points are selected
+                            respToBeMade = 0;
+                        end
+                    end
+                end
+            end
+            
+            
+            tEnd = GetSecs;
+            rt = tEnd - tStart;
+            
+            
+            %Draw nothing for 300 ms
+            DrawFormattedText(wd, ' ', xCenter, yCenter, white);
+            vbl = Screen('Flip', wd);
+            WaitSecs (0.3);
+            Screen('TextFont', wd, 'Arial');
+            Screen('TextSize', wd, 40);
+            
+            %%%%%%%%%%FEEDBACK%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            if rt > 2
+                points = 0;
+                response = 6;
+                DrawFormattedText(wd, ['Time out, please respond faster'], xfeedback1, yfeedback1, white);
+                vbl = Screen('Flip', wd);
+                WaitSecs (0.8);
+                vbl = Screen('Flip', wd);
+                WaitSecs (1.5);
+            else
+                
+                if points == lowPoints %LV
+                    %Feedback onset
+                    Screen('DrawTexture', wd, stim6im, [], rect.stim{5} ); %Draw the low value diamond
+                    vbl = Screen('Flip', wd);
+                    
+                    WaitSecs (0.8);
+                    
+                    
+                    if counterBalancing(subjectCon,2) == 1
+                        numYell = numYell + 1;
+                    elseif counterBalancing(subjectCon,2) == 2
+                        numBlue = numBlue + 1;
+                    end
+                    
+                    if blockType == 2 %LOW DEVALUATED
+                        points = 0;
+                        DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
+                    elseif blockType == 1
+                        DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
+                    elseif blockType == 3
+                        DrawFormattedText(wd, ['+' int2str(points)], xfeedback2, yfeedback2);
+                    end
+                    
+                    vbl = Screen('Flip', wd);
+                    WaitSecs (1.5);
+                    
+                elseif points == 100  %HV
+                    
+                    Screen('DrawTexture', wd, stim5im, [], rect.stim{5} ); %Draw the high value diamond
+                    vbl = Screen('Flip', wd);
+                    
+                    
+                    WaitSecs (0.8);
+                    if counterBalancing(subjectCon,2) == 2
+                        numYell = numYell + 1;
+                    elseif counterBalancing(subjectCon,2) == 1
+                        numBlue = numBlue + 1;
+                    end
+                    
+                    if blockType == 1
+                        points = 0;
+                        DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
+                    elseif blockType == 2
+                        DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
+                    elseif blockType == 3
+                        DrawFormattedText(wd, ['+' int2str(points)], xfeedback3, yfeedback3, white);
+                    end
+                    
+                    
+                    vbl = Screen('Flip', wd);
+                    WaitSecs (1.5);
+                    
+                elseif points == 0 ; % error trial
+                    DrawFormattedText(wd, 'ERROR', xfeedback4, yfeedback4, red);
+                    vbl = Screen('Flip', wd);
+                    %          %triggers
+                    %                 outp(address, tgF_INC);
+                    %                 WaitSecs(0.001);
+                    %                 outp(address, triggerEmpty);
+                    WaitSecs (0.8);
+                    DrawFormattedText(wd, ['+' int2str(points)], xfeedback2, yfeedback2, white);
+                    vbl = Screen('Flip', wd);
+                    WaitSecs (1.5);
+                end
+            end
+            DATA.trial_data(totalTrial, 1) = totalTrial;
+            DATA.trial_data(totalTrial, 2) = block;
+            DATA.trial_data(totalTrial, 3) = blockType; %1=high devaluated
+            DATA.trial_data(totalTrial, 4) = CurrentStim;
+            DATA.trial_data(totalTrial, 5) = response; % 1 correct response / 0 incorrect / 3 high points selected (arrows) / 4 low select (arrows)/6 Time out
+            DATA.trial_data(totalTrial, 6) = hand; %response to the q
+            DATA.trial_data(totalTrial, 7) = rt;
+            DATA.trial_data(totalTrial, 8) = points;
+            DATA.trial_data(totalTrial, 9) = totalPoints;
+            if response == 1
+                DATA.trial_data(totalTrial, 10) = 1;
+            else
+                DATA.trial_data(totalTrial, 10) = 0;
+            end
+        else
+            DATA.trial_data(totalTrial, 1) = totalTrial;
+            DATA.trial_data(totalTrial, 2) = block;
+            DATA.trial_data(totalTrial, 3) = blockType; %1=high devaluated
+            DATA.trial_data(totalTrial, 4) = CurrentStim;
+            DATA.trial_data(totalTrial, 5) = 5; % tooearly
+            DATA.trial_data(totalTrial, 6) = 0; %response to the q
+            DATA.trial_data(totalTrial, 7) = 0;
+            DATA.trial_data(totalTrial, 8) = 0;
+            DATA.trial_data(totalTrial, 9) = totalPoints;
+            DATA.trial_data(totalTrial, 10) = 0;
+            tooearly = 0;
+            
+            DrawFormattedText(wd, ['TOO FAST! No diamond for you!'], 'center', yPos, white);
+            vbl = Screen('Flip', wd);
+            WaitSecs (3);
+        end
+        %this bit is for the *summary*
+        if counterBalancing(subjectCon,2) == 1
+            valueBlue = highPoints;
+            valueYell = lowPoints;
+        elseif counterBalancing(subjectCon,2) == 2
+            valueYell = highPoints;
+            valueBlue = lowPoints;
+        end
+        
         Screen('TextFont', wd, 'Arial');
         Screen('TextSize', wd, 40);
-      
-   %%%%%%%%%%FEEDBACK%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         
-   if rt > 2;
-        points = 0; 
-        response = 6;
-        DrawFormattedText(wd, ['Time out, please respond faster'], xfeedback1, yfeedback1, white);
-        vbl = Screen('Flip', wd);
-        WaitSecs (0.8);     
-        vbl = Screen('Flip', wd);
-        WaitSecs (1.5);        
-   else 
-       
-    if points == lowPoints %LV
-        %Feedback onset
-        Screen('DrawTexture', wd, stim6im, [], rect.stim{5} ); %Draw the low value diamond
-        vbl = Screen('Flip', wd);
-% %                 %triggers 
-%         if CurrentStim == 3;
-%             if blockType == 1 %HIGH DEVALUATED
-%             outp(address, tgF_arrows_OK);
-%             WaitSecs(0.001);
-%             outp(address, triggerEmpty);
-%             else
-%             outp(address, tgF_arrows_BAD);
-%             WaitSecs(0.001);
-%             outp(address, triggerEmpty);
-%             end
-%         else
-%             if blockType == 1%HVdevaluated (DH)
-%                 outp(address, tgF_DH_LV);
-%                 WaitSecs(0.001);
-%                 outp(address, triggerEmpty);
-%             elseif blockType == 2%LVdevaluated (DL)
-%                 outp(address, tgF_DL_LV);
-%                 WaitSecs(0.001);
-%                 outp(address, triggerEmpty);
-%             elseif blockType == 3 %No devaluation (NoD)
-%                 outp(address, tgF_NoD_LV);
-%                 WaitSecs(0.001);
-%                 outp(address, triggerEmpty);
-%             end
-%         end
-        WaitSecs (0.8); 
-
         
-         if counterBalancing(subjectCon,2) == 1
-            numYell = numYell + 1;
-         elseif counterBalancing(subjectCon,2) == 2
-             numBlue = numBlue + 1;
-         end 
-
-         if blockType == 2 %LOW DEVALUATED
-             points = 0;
-             DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
-         elseif blockType == 1             
-             DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
-         elseif blockType == 3           
-           DrawFormattedText(wd, ['+' int2str(points)], xfeedback2, yfeedback2);
-         end
-               
-        vbl = Screen('Flip', wd);
-        WaitSecs (1.5);
-
-    elseif points == 100 ; %HV
-
-        Screen('DrawTexture', wd, stim5im, [], rect.stim{5} ); %Draw the high value diamond
-        vbl = Screen('Flip', wd);
         
-% %         %triggers
-%         if CurrentStim == 3;
-%             if blockType == 1 %HIGH DEVALUATED
-%             outp(address, tgF_arrows_BAD);
-%             WaitSecs(0.001);
-%             outp(address, triggerEmpty);
-%             else
-%             outp(address, tgF_arrows_OK);
-%             WaitSecs(0.001);
-%             outp(address, triggerEmpty);
-%             end
-%         else
-%             if blockType == 1 %HVdevaluated (DH)
-%                 outp(address, tgF_DH_HV);
-%                 WaitSecs(0.001);
-%                 outp(address, triggerEmpty);
-%             elseif blockType == 2 %LVdevaluated (DL)
-%                 outp(address, tgF_DL_HV);
-%                 WaitSecs(0.001);
-%                 outp(address, triggerEmpty);
-%             elseif blockType == 3 %No devaluation (NoD)
-%                 outp(address, tgF_NoD_HV);
-%                 WaitSecs(0.001);
-%                 outp(address, triggerEmpty);
-%             end
-%         end
-        WaitSecs (0.8);
-         if counterBalancing(subjectCon,2) == 2
-            numYell = numYell + 1;
-         elseif counterBalancing(subjectCon,2) == 1
-             numBlue = numBlue + 1;
-         end 
         
-         if blockType == 1
-            points = 0;
-            DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
-         elseif blockType == 2
-            DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
-         elseif blockType == 3    
-           DrawFormattedText(wd, ['+' int2str(points)], xfeedback3, yfeedback3, white);
-         end
         
-    
-        vbl = Screen('Flip', wd);
-        WaitSecs (1.5);  
-        
-    elseif points == 0 ; % error trial
-        DrawFormattedText(wd, 'ERROR', xfeedback4, yfeedback4, red);
-        vbl = Screen('Flip', wd);
-%          %triggers
-%                 outp(address, tgF_INC);
-%                 WaitSecs(0.001);
-%                 outp(address, triggerEmpty);
-        WaitSecs (0.8);
-        DrawFormattedText(wd, ['+' int2str(points)], xfeedback2, yfeedback2, white);
-        vbl = Screen('Flip', wd);
-        WaitSecs (1.5);  
     end
-   end
-    DATA.trial_data(totalTrial, 1) = totalTrial; 
-    DATA.trial_data(totalTrial, 2) = block;
-    DATA.trial_data(totalTrial, 3) = blockType; %1=high devaluated
-    DATA.trial_data(totalTrial, 4) = CurrentStim; 
-    DATA.trial_data(totalTrial, 5) = response; % 1 correct response / 0 incorrect / 3 high points selected (arrows) / 4 low select (arrows)/6 Time out
-    DATA.trial_data(totalTrial, 6) = hand; %response to the q
-    DATA.trial_data(totalTrial, 7) = rt;    
-    DATA.trial_data(totalTrial, 8) = points;
-    DATA.trial_data(totalTrial, 9) = totalPoints;
-    if response == 1
-        DATA.trial_data(totalTrial, 10) = 1;
-    else
-        DATA.trial_data(totalTrial, 10) = 0;
-    end
-  else
-    DATA.trial_data(totalTrial, 1) = totalTrial; 
-    DATA.trial_data(totalTrial, 2) = block;
-    DATA.trial_data(totalTrial, 3) = blockType; %1=high devaluated
-    DATA.trial_data(totalTrial, 4) = CurrentStim; 
-    DATA.trial_data(totalTrial, 5) = 5; % tooearly
-    DATA.trial_data(totalTrial, 6) = 0; %response to the q
-    DATA.trial_data(totalTrial, 7) = 0;    
-    DATA.trial_data(totalTrial, 8) = 0;
-    DATA.trial_data(totalTrial, 9) = totalPoints;
-    DATA.trial_data(totalTrial, 10) = 0;   
-        tooearly = 0;
-        
-        DrawFormattedText(wd, ['TOO FAST! No diamond for you!'], 'center', yPos, white);
-        vbl = Screen('Flip', wd);
-        WaitSecs (3);  
-  end
-  %this bit is for the *summary*
-  if counterBalancing(subjectCon,2) == 1
-      valueBlue = highPoints;
-      valueYell = lowPoints;
-  elseif counterBalancing(subjectCon,2) == 2
-      valueYell = highPoints;
-      valueBlue = lowPoints;
-  end
-
-        Screen('TextFont', wd, 'Arial');
-        Screen('TextSize', wd, 40);
     
-  
-
+    summary
     
-end
-
-summary
-
- 
-
-
-
+    
+    
+    
+    
 end
