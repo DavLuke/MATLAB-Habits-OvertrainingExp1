@@ -1,70 +1,108 @@
+%for each participant/session here we stablished the order of DevH and DevM
+%blocks. 
+%DevOrder = 1 means that Block 3 is a DevH, Block 4 is a DevM;
+%Block 7 would be a DevM and the eighth a DevH. 
+%DevOrder = 2 means that Block 4 is a DevH, Block 3 is a DevM;
+%Block 8 would be a DevM and the ninth a DevH.
+DevOrder = round(rand() + 1);
 
 for block = 1:numBlocks 
-
-
-%     %% SPACESHIPS SCREEN
-%  
-
-
-        if block > PreTrainingBlocks
-            kkk = block - PreTrainingBlocks;
-  
-           
-           DrawFormattedText(wd, ['Now have a look at your spaceships'], 'center', resultText1, white);
-            Screen('Flip', wd);
-            WaitSecs (2);
-            %blockType = 1, High devaluated; =2, Low devalueated; = 3 no devaluation.
    
-               if rem (kkk,3)==1
-                   diamondevaluated = 1;
-                   DrawFormattedText(wd, ['The spaceship with the BLUE diamonds has departured for Earth'], 'center', resultText1, white);
-                   DrawFormattedText(wd, ['You CANNOT keep the BLUE diamonds earned in the next block'], 'center', resultText2, white);
-                   if counterBalancing(subjectCon,2) == 1 %High is the blue (devaluated)
-                       blockType = 1; % HV devaluated
-                   else
-                       blockType = 2; % LV devaluated                      
-                   end
-                   
-               elseif rem (kkk,3)==2
-                   diamondevaluated = 2;
-                   DrawFormattedText(wd, ['The spaceship with the YELLOW diamonds has departured for Earth'], 'center', resultText1, white);
-                   DrawFormattedText(wd, ['You CANNOT keep the YELLOW diamonds earned in the next block'], 'center', resultText2, white);
-                   if counterBalancing(subjectCon,2) == 1 %High is the blue (nondevaluated)
-                       blockType = 2;                   
-                   elseif counterBalancing(subjectCon,2) == 2%High is the yellow (devaluated)
-                       blockType = 1;                     
-                   end
-                   
-               elseif rem (kkk,3)==0
-                   DrawFormattedText(wd, ['The two spaceships are available'], 'center', resultText1, white);
-                   DrawFormattedText(wd, ['You can keep both the YELLOW and BLUE diamonds earned in the next block'], 'center', resultText2, white);
-                   blockType = 3;
-                   diamondevaluated = 0;
-               end
-                       Screen('TextSize', wd, 20);
-               DrawFormattedText(wd, ['Total points: ' int2str(totalPoints)],'center', resultText4, white);
-               DrawFormattedText(wd, ['Press the spacebar when you are ready to continue'], 'center', resultText5, white);   
-               Screen('Flip', wd);
-                     WaitSecs (1);
-                     nextScreen = 0;
-                     while nextScreen == 0;
-                         [keyIsDown, secs, keyCode] = KbCheck; %Check for response
-                         if keyCode(spacebar);
-                             nextScreen = 1;
-                         end
-                     end
-                     fixation
-                     Screen('TextSize', wd, 40);
-                     WaitSecs (2);
-      
-
-            
+ %blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation.
  
+     if DevOrder == 1
+         if block == 3 || block == 8
+             blockType = 1;
+         elseif block == 4 || block == 7
+             blockType = 2;
+         else
+             blockType = 3;
+         end
+     else
+         if block == 3 || block == 8
+             blockType = 2;
+         elseif block == 4 || block == 7
+             blockType = 1;
+         else
+             blockType = 3;
+         end
+     end
+%SPACESHIPS SCREEN at the beginning of each block. It informs about what type of block is the next one:
+     DrawFormattedText(wd, ['Now have a look at your spaceships'], 'center', resultText1, white);
+     Screen('Flip', wd);
+     WaitSecs (2);
+     if blockType == 1
+         if counterBalancing(subjectCon,2) == 1
+             DrawFormattedText(wd, ['La nave para los diamantes AZULES se ha marchado a la Tierra'], 'center', resultText1, white);
+             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AZULES'], 'center', resultText2, white);
+         elseif counterBalancing(subjectCon,2) == 2
+             DrawFormattedText(wd, ['La nave para los diamantes VERDES se ha marchado a la Tierra'], 'center', resultText1, white);
+             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes VERDES'], 'center', resultText2, white);
+         elseif counterBalancing(subjectCon,2) == 3
+             DrawFormattedText(wd, ['La nave para los diamantes AMARILLOS se ha marchado a la Tierra'], 'center', resultText1, white);
+             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AMARILLOS'], 'center', resultText2, white);
+         end
+     elseif blockType == 2
+         if counterBalancing(subjectCon,2) == 1
+             DrawFormattedText(wd, ['La nave para los diamantes AMARILLOS se ha marchado a la Tierra'], 'center', resultText1, white);
+             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AMARILLOS'], 'center', resultText2, white);
+         elseif counterBalancing(subjectCon,2) == 2
+             DrawFormattedText(wd, ['La nave para los diamantes AZULES se ha marchado a la Tierra'], 'center', resultText1, white);
+             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes AZULES'], 'center', resultText2, white);
+         elseif counterBalancing(subjectCon,2) == 3
+             DrawFormattedText(wd, ['La nave para los diamantes VERDES se ha marchado a la Tierra'], 'center', resultText1, white);
+             DrawFormattedText(wd, ['A partir de ahora NO PUEDES QUEDARTE los puntos ganados de los diamantes VERDES'], 'center', resultText2, white);
+         end
+     elseif blockType == 3
+         DrawFormattedText(wd, ['Las tres naves están disponibles'], 'center', resultText1, white);
+         DrawFormattedText(wd, ['A partir de ahora puedes quedarte los puntos de los diamantes AZUL, AMARILLO y VERDE'], 'center', resultText2, white);
+     end
+     
+        
+        if block ==1
+            DrawFormattedText(wd, ['The spaceship with the BLUE diamonds has departured for Earth'], 'center', resultText1, white);
+            DrawFormattedText(wd, ['You CANNOT keep the BLUE diamonds earned in the next block'], 'center', resultText2, white);
+            if counterBalancing(subjectCon,2) == 1 %High is the blue (devaluated)
+                blockType = 1; % HV devaluated
+            else
+                blockType = 2; % LV devaluated
+            end
+            
+        elseif rem (block,3)==2
+            diamondevaluated = 2;
+            DrawFormattedText(wd, ['The spaceship with the YELLOW diamonds has departured for Earth'], 'center', resultText1, white);
+            DrawFormattedText(wd, ['You CANNOT keep the YELLOW diamonds earned in the next block'], 'center', resultText2, white);
+            if counterBalancing(subjectCon,2) == 1 %High is the blue (nondevaluated)
+                blockType = 2;
+            elseif counterBalancing(subjectCon,2) == 2%High is the yellow (devaluated)
+                blockType = 1;
+            end
+            
+        else 
 
-    end
+        end
+        
+        
+        
+        Screen('TextSize', wd, 20);
+        DrawFormattedText(wd, ['Total points: ' int2str(totalPoints)],'center', resultText4, white);
+        DrawFormattedText(wd, ['Press the spacebar when you are ready to continue'], 'center', resultText5, white);
+        Screen('Flip', wd);
+        WaitSecs (1);
+        nextScreen = 0;
+        while nextScreen == 0
+            [keyIsDown, secs, keyCode] = KbCheck; %Check for response
+            if keyCode(spacebar)
+                nextScreen = 1;
+            end
+        end
+        fixation
+        Screen('TextSize', wd, 40);
+        WaitSecs (2);
+        
 
 
-    %% LEARNING TRIALS SCREEN
+    % LEARNING TRIALS SCREEN
     normaltrial = 0;
  for trial = 1:trialsxblock+3; 
     
@@ -76,7 +114,7 @@ for block = 1:numBlocks
     AlienPosition = 0;
     pepe = round(rand() + 1);
     AlienPosition = round(rand() + 1);
-    %% The position of the response which leads to HV outcome (3)%%
+    % The position of the response which leads to HV outcome (3)%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if AlienPosition == 1 %% The position
@@ -194,31 +232,9 @@ end
                                      response = 0;
                                      respToBeMade = 0;
                                     end
-%                                     %triggers
-%                                     if response ==1
-%                                     if blockType == 1 %HVdevaluated (DH)
-%                                         outp(address, tgR_DH_LV_Right);
-%                                         WaitSecs(0.001);
-%                                         outp(address, triggerEmpty);
-%                                     elseif blockType == 2 %LVdevaluated (DL)
-%                                         outp(address, tgR_DL_LV_Right);
-%                                         WaitSecs(0.001);
-%                                         outp(address, triggerEmpty);
-%                                     elseif blockType == 3 %No devaluation (NoD)
-%                                         outp(address, tgR_NoD_LV_Right);
-%                                         WaitSecs(0.001);
-%                                         outp(address, triggerEmpty);
-%                                     end
-%                                     else
-%                                         %incorrect response
-%                                         outp(address, tgR_INC);
-%                                         WaitSecs(0.001);
-%                                         outp(address, triggerEmpty);
-%                                     end                                    
+                                  
                      elseif CurrentStim == 3;
-%                                         outp(address, tgR_arrows);
-%                                         WaitSecs(0.001);
-%                                         outp(address, triggerEmpty);
+
                                     if pepe == 1; 
                                      points = lowPoints; 
                                      response = 4; % the LOW points are selected
