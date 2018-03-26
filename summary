@@ -1,34 +1,38 @@
-  if diamondevaluated == 1
-             valueBlue =0;
-         elseif diamondevaluated == 2
-             valueYell =0;
-         else
-         end
- pointsBlue= numBlue* valueBlue; 
- pointsYellow= numYell* valueYell;
- Screen('TextSize', wd, 20);
-summary1 = Screen('TextBounds', wd, 'Now you can sell the diamonds acquired in this block... ');
+  %OK, first I will try to show just the text, and comment all related with the
+%images. That's why there are many commented lines
+% 
+% pointsBlue = numBlue* valueBlue;
+% pointsYellow = numYell* valueYell;
+% pointsGreen = numGreen* valueGreen;
+
+Screen('TextSize', wd, 20);
+summary1 = Screen('TextBounds', wd, 'Ahora puedes vender los diamantes conseguidos en este bloque... ');
 xsummary1 = (screenXpixels / 2) - (summary1(3) / 2);
 ysummary1 = (screenYpixels / 4) - (summary1(4) / 2);
+Screen('TextStyle', wd ,1);
+Screen('TextSize', wd, 26);
 
-    Screen('TextStyle', wd ,1);
-    Screen('TextSize', wd, 26);
-summary11 = Screen('TextBounds', wd, 'The BLUE diamonds are worth nothing because the BLUE spaceship was gone!');
+summary11 = Screen('TextBounds', wd, '¡Los diamantes azules NO TE VALEN NADA ya que su nave estaba fuera!');
 xsummary11 = (screenXpixels / 2) - (summary11(3) / 2);
 ysummary11 = (screenYpixels / 3.5) - (summary11(4) / 2);
-
-summary12 = Screen('TextBounds', wd, 'The YELLOW diamonds are worth nothing because the YELLOW spaceship was gone!');
+Screen('TextStyle', wd ,0);
+Screen('TextSize', wd, 20);
+summary12 = Screen('TextBounds', wd, '¡Los diamantes amarillos NO TE VALEN NADA ya que su nave estaba fuera!');
 xsummary12 = (screenXpixels / 2) - (summary12(3) / 2);
 ysummary12 = (screenYpixels / 3.5) - (summary12(4) / 2);
-    Screen('TextStyle', wd ,0);
-    Screen('TextSize', wd, 20);
+Screen('TextStyle', wd ,0);
+Screen('TextSize', wd, 20);
+summary13 = Screen('TextBounds', wd, '¡Los diamantes verdes NO TE VALEN NADA ya que su nave estaba fuera!');
+xsummary13 = (screenXpixels / 2) - (summary13(3) / 2);
+ysummary13 = (screenYpixels / 3.5) - (summary13(4) / 2);
+Screen('TextStyle', wd ,0);
+Screen('TextSize', wd, 20);
 
-%summary2 = Screen('TextBounds', wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points']);
 summary2 = Screen('TextBounds', wd, ['x ' int2str(numBlue) ' x  10 = ' int2str( pointsBlue) ' points']);
 xsummary2 = (screenXpixels / 3) - (summary2(3) / 2);
 ysummary2 = (screenYpixels / 2) - (summary2(4) / 2);
 
-%summary3 = Screen('TextBounds', wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points']);
+
 summary3 = Screen('TextBounds', wd, ['x ' int2str(numYell) ' x  10 = ' int2str( pointsYellow) ' points']);
 xsummary3 = (screenXpixels / 3) - (summary3(3) / 2);
 ysummary3 = (screenYpixels / 1.3) - (summary3(4) / 2);
@@ -37,159 +41,183 @@ summary4 = Screen('TextBounds', wd, ['Total points: ' int2str(totalPoints) ' poi
 xsummary4 = (screenXpixels / 1.25) - (summary4(3) / 2);
 ysummary4 = (screenYpixels / 6) - (summary4(4) / 2);
 
-
-
-if diamondevaluated == 0
-  if counterBalancing(subjectCon,2) == 1
-Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
-  elseif counterBalancing(subjectCon,2) == 2
-Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
-  end
-DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
-DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
-DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
-
-DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
-DrawFormattedText(wd, 'Press the spacebar to update your points', 'center', resultText5, white); 
-Screen('Flip', wd);
-WaitSecs(0.2);KbWait; 
-WaitSecs(0.5);
-totalPoints = pointsBlue + pointsYellow + totalPoints;
-
-  if counterBalancing(subjectCon,2) == 1
-Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
-  elseif counterBalancing(subjectCon,2) == 2
-Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
-  end
-DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
-DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
-DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
-
-DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
-DrawFormattedText(wd, 'Press the spacebar when you are ready to continue', 'center', resultText5, white); 
-Screen('Flip', wd);
-DATA.trial_data(totalTrial, 9) = totalPoints;
-WaitSecs(0.2);KbWait; 
-WaitSecs(2);
-
-elseif diamondevaluated == 1 %%%BLUE
-    
-  %diamonds
-  if counterBalancing(subjectCon,2) == 1
-Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
-  elseif counterBalancing(subjectCon,2) == 2
-Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
-  end
-DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
-DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
-DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
- %text on top
-    %DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
-    Screen('TextStyle', wd ,1);
-    Screen('TextSize', wd, 26);
-    DrawFormattedText(wd, 'The BLUE diamonds are worth nothing because the BLUE spaceship was gone!', xsummary11, ysummary11, white);
-    Screen('TextStyle', wd ,0);
-    Screen('TextSize', wd, 20);
-%total points top-right
-DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
-%press the spacebar
-DrawFormattedText(wd, 'Press the spacebar to update your points', 'center', resultText5, white); 
-Screen('Flip', wd);
-WaitSecs(0.2);KbWait; 
-WaitSecs(0.5);
-
-%update of the points
-totalPoints = pointsBlue + pointsYellow + totalPoints;
-  %diamonds
-  if counterBalancing(subjectCon,2) == 1
-Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
-  elseif counterBalancing(subjectCon,2) == 2
-Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
-  end
-DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
-DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
-DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
- %text on top
-    %DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
-    Screen('TextStyle', wd ,1);
-    Screen('TextSize', wd, 26);
-    DrawFormattedText(wd, 'The BLUE diamonds are worth nothing because the BLUE spaceship was gone!', xsummary11, ysummary11, white);
-    Screen('TextStyle', wd ,0);
-    Screen('TextSize', wd, 20);
-    
-DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
-DrawFormattedText(wd, 'Press the spacebar when you are ready to continue', 'center', resultText5, white); 
-Screen('Flip', wd);
-DATA.trial_data(totalTrial, 9) = totalPoints;
-WaitSecs(0.2);KbWait; 
-WaitSecs(2);   
-
-elseif diamondevaluated == 2
-  %diamonds
-  if counterBalancing(subjectCon,2) == 1
-Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
-  elseif counterBalancing(subjectCon,2) == 2
-Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
-  end
-DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
-DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
-DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
-     %text on top
-    %DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
-    Screen('TextStyle', wd ,1);
-    Screen('TextSize', wd, 26);
-    DrawFormattedText(wd, 'The YELLOW diamonds are worth nothing because the YELLOW spaceship was gone!', xsummary12, ysummary12, white);
-    Screen('TextStyle', wd ,0);
-    Screen('TextSize', wd, 20);
-%total points top-right
-DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
-%press the spacebar
-DrawFormattedText(wd, 'Press the spacebar to update your points', 'center', resultText5, white); 
-Screen('Flip', wd);
-WaitSecs(0.2);KbWait; 
-WaitSecs(0.5);
-
-%update of the points
-totalPoints = pointsBlue + pointsYellow + totalPoints;
-%diamonds
-  if counterBalancing(subjectCon,2) == 1
-Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
-  elseif counterBalancing(subjectCon,2) == 2
-Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );  
-Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
-  end
-DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
-DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
-DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
-     %text on top
-   % DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
-    Screen('TextStyle', wd ,1);
-    Screen('TextSize', wd, 26);
-    DrawFormattedText(wd, 'The YELLOW diamonds are worth nothing because the YELLOW spaceship was gone!', xsummary12, ysummary12, white);
-    Screen('TextStyle', wd ,0);
-    Screen('TextSize', wd, 20);
-    
-DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
-DrawFormattedText(wd, 'Press the spacebar when you are ready to continue', 'center', resultText5, white); 
-Screen('Flip', wd);
-DATA.trial_data(totalTrial, 9) = totalPoints;
-WaitSecs(0.2);KbWait; 
-WaitSecs(2);  
-end
- pointsBlue= 0;
- numBlue = 0;
- 
- pointsYellow=0;
- numYell=0;
+% HOW IT WORKed. This draws the HIGH and LOW diamond. The high always at the
+% upper position.
+% HOW it might work better. I draw the stimOut1tex, stimOut2tex and
+% stimOut3tex UP, MEDIUM and DOWN positions. I write the numbers of
+% diamonds and values using their dynamic name (not numBlue, instead,
+% "numHighValue"). The value is obviously striaghtforward. The only part of
+% the code that I should change depending on Blocktype is the text on top
+% saying that the "colour" is devalued,
+% *** All the things related with drawing the pictures are comented 
+%Screen('DrawTexture', wd, stimOut1tex, [], rect.stim{8} ); %high value diamond at the upper-left part of the screen
+%Screen('DrawTexture', wd, stimOut2tex, [], rect.stim{3} ); %medium value diamond at the centre-left part of the screen
+%Screen('DrawTexture', wd, stimOut3tex, [], rect.stim{7} ); %low value diamond at the bottom-left part of the screen
+%I should try to get the text at the centre, but at the same height than
+%the diamonds. numHV etc are variables that I haven't created yet. The
+%coordenates are all wrong at the moment.
+DrawFormattedText(wd, ['x ' int2str(numHV) ' x ' int2str(actualHVvalue) ' = ' int2str( HVpoints) ' points'], xsummary2, ysummary2, white);
+DrawFormattedText(wd, ['x ' int2str(numMV) ' x ' int2str(actualMVvalue) ' = ' int2str( MVpoints) ' points'], xsummary3, ysummary3, white);
+DrawFormattedText(wd, ['x ' int2str(numLV) ' x ' int2str(actualLVvalue) ' = ' int2str( LVpoints) ' points'], xsummary3, ysummary3, white);
+% % 
+%  if diamondevaluated == 0
+% %     if counterBalancing(subjectCon,2) == 1
+% %         Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left
+% %         Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
+% %     elseif counterBalancing(subjectCon,2) == 2
+% %         Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );
+% %         Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
+% %     end
+% %     DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
+% %     DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
+% %     DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
+% %     
+%     DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
+%     DrawFormattedText(wd, 'Press the spacebar to update your points', 'center', resultText5, white);
+%     Screen('Flip', wd);
+%     WaitSecs(0.2);KbWait;
+%     WaitSecs(0.5);
+%     totalPoints = pointsBlue + pointsYellow + totalPoints;
+%     
+%     if counterBalancing(subjectCon,2) == 1
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
+%     elseif counterBalancing(subjectCon,2) == 2
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
+%     end
+%     DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
+%     DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
+%     DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
+%     
+%     DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
+%     DrawFormattedText(wd, 'Press the spacebar when you are ready to continue', 'center', resultText5, white);
+%     Screen('Flip', wd);
+%     DATA.trial_data(totalTrial, 9) = totalPoints;
+%     WaitSecs(0.2);KbWait;
+%     WaitSecs(2);
+%     
+% elseif diamondevaluated == 1 %%%BLUE
+%     
+%     %diamonds
+%     if counterBalancing(subjectCon,2) == 1
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
+%     elseif counterBalancing(subjectCon,2) == 2
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
+%     end
+%     DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
+%     DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
+%     DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
+%     %text on top
+%     %DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
+%     Screen('TextStyle', wd ,1);
+%     Screen('TextSize', wd, 26);
+%     DrawFormattedText(wd, 'The BLUE diamonds are worth nothing because the BLUE spaceship was gone!', xsummary11, ysummary11, white);
+%     Screen('TextStyle', wd ,0);
+%     Screen('TextSize', wd, 20);
+%     %total points top-right
+%     DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
+%     %press the spacebar
+%     DrawFormattedText(wd, 'Press the spacebar to update your points', 'center', resultText5, white);
+%     Screen('Flip', wd);
+%     WaitSecs(0.2);KbWait;
+%     WaitSecs(0.5);
+%     
+%     %update of the points
+%     totalPoints = pointsBlue + pointsYellow + totalPoints;
+%     %diamonds
+%     if counterBalancing(subjectCon,2) == 1
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
+%     elseif counterBalancing(subjectCon,2) == 2
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
+%     end
+%     DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
+%     DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
+%     DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
+%     %text on top
+%     %DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
+%     Screen('TextStyle', wd ,1);
+%     Screen('TextSize', wd, 26);
+%     DrawFormattedText(wd, 'The BLUE diamonds are worth nothing because the BLUE spaceship was gone!', xsummary11, ysummary11, white);
+%     Screen('TextStyle', wd ,0);
+%     Screen('TextSize', wd, 20);
+%     
+%     DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
+%     DrawFormattedText(wd, 'Press the spacebar when you are ready to continue', 'center', resultText5, white);
+%     Screen('Flip', wd);
+%     DATA.trial_data(totalTrial, 9) = totalPoints;
+%     WaitSecs(0.2);KbWait;
+%     WaitSecs(2);
+%     
+% elseif diamondevaluated == 2
+%     %diamonds
+%     if counterBalancing(subjectCon,2) == 1
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
+%     elseif counterBalancing(subjectCon,2) == 2
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
+%     end
+%     DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
+%     DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
+%     DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
+%     %text on top
+%     %DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
+%     Screen('TextStyle', wd ,1);
+%     Screen('TextSize', wd, 26);
+%     DrawFormattedText(wd, 'The YELLOW diamonds are worth nothing because the YELLOW spaceship was gone!', xsummary12, ysummary12, white);
+%     Screen('TextStyle', wd ,0);
+%     Screen('TextSize', wd, 20);
+%     %total points top-right
+%     DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
+%     %press the spacebar
+%     DrawFormattedText(wd, 'Press the spacebar to update your points', 'center', resultText5, white);
+%     Screen('Flip', wd);
+%     WaitSecs(0.2);KbWait;
+%     WaitSecs(0.5);
+%     
+%     %update of the points
+%     totalPoints = pointsBlue + pointsYellow + totalPoints;
+%     %diamonds
+%     if counterBalancing(subjectCon,2) == 1
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{3} ); %Draw the high value diamond on the left
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{7} );%Draw the low value diamond on the left-down
+%     elseif counterBalancing(subjectCon,2) == 2
+%         Screen('DrawTexture', wd, stim5im, [], rect.stim{7} );
+%         Screen('DrawTexture', wd, stim6im, [], rect.stim{3} );
+%     end
+%     DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block... ', xsummary1, ysummary1, white);
+%     DrawFormattedText(wd, ['x ' int2str(numBlue) ' x ' int2str(valueBlue) ' = ' int2str( pointsBlue) ' points'], xsummary2, ysummary2, white);
+%     DrawFormattedText(wd, ['x ' int2str(numYell) ' x ' int2str(valueYell) ' = ' int2str( pointsYellow) ' points'], xsummary3, ysummary3, white);
+%     %text on top
+%     % DrawFormattedText(wd, 'Now you can sell the diamonds acquired in this block...', xsummary1, ysummary1, white);
+%     Screen('TextStyle', wd ,1);
+%     Screen('TextSize', wd, 26);
+%     DrawFormattedText(wd, 'The YELLOW diamonds are worth nothing because the YELLOW spaceship was gone!', xsummary12, ysummary12, white);
+%     Screen('TextStyle', wd ,0);
+%     Screen('TextSize', wd, 20);
+%     
+%     DrawFormattedText(wd, ['Total points: ' int2str(totalPoints) ' points'], xsummary4, ysummary4, white);
+%     DrawFormattedText(wd, 'Press the spacebar when you are ready to continue', 'center', resultText5, white);
+%     Screen('Flip', wd);
+%     DATA.trial_data(totalTrial, 9) = totalPoints;
+%     WaitSecs(0.2);KbWait;
+%     WaitSecs(2);
+% end
+% pointsBlue= 0;
+% numBlue = 0;
+% valueBlue = 0;
+% 
+% 
+% 
+% pointsBlue = numBlue* valueBlue;
+% pointsYellow = numYell* valueYell;
+% pointsGreen = numGreen* valueGreen;
+% 
+% pointsYellow=0;
+% numYell=0;
 Screen('TextSize', wd, 40);
