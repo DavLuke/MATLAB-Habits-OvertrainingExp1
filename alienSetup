@@ -62,11 +62,11 @@ pKey = KbName('p'); %response for the Alien on the right
 
 
 
-        Screen('TextFont', wd, 'Arial');
-        Screen('TextSize', wd, 40);
+Screen('TextFont', wd, 'Arial');
+Screen('TextSize', wd, 20);
 % Position of the feedback text
 
-feedbacktextRect1 = Screen('TextBounds', wd, 'Time out, respond faster');
+feedbacktextRect1 = Screen('TextBounds', wd, '¡Muy lento! Por favor, responde más rápido');
 xfeedback1 = (screenXpixels / 2) - (feedbacktextRect1(3) / 2);
 yfeedback1 = (screenYpixels / 2) - (feedbacktextRect1(4) / 2);
 
@@ -85,14 +85,22 @@ yfeedback4 = (screenYpixels / 2) - (feedbacktextRect4(4) / 2);
 totalTrial = 0; 
 numBlue = 0;
 numYell = 0;
+numGreen = 0;
 valueBlue = 0;
 valueYell = 0;
+valueGreen = 0;
 normaltrial = 0;
 diamondevaluated = 0;
 tooearly = 0;
 blockType = 3;
 AlienPosition = 0;
-
-        
-
-        
+HVpoints = 0 ;
+MVpoints = 0 ;
+LVpoints = 0 ;
+numHV = 0 ;
+numMV = 0 ;
+numLV = 0 ;
+actualHVvalue = 0 ;
+actualMVvalue = 0 ;
+actualLVvalue = 0 ;
+timeLimit = 0;
