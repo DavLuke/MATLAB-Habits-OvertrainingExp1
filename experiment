@@ -27,8 +27,8 @@ for block = 1:numBlocks
             blockType = 3;
         end
     end
-
-%SPACESHIPS SCREEN at the beginning of each block. It informs about what type of block is the next one:    
+    
+    %SPACESHIPS SCREEN at the beginning of each block. It informs about what type of block is the next one:
     if block > 1
         DrawFormattedText(wd, ['Now have a look at your spaceships'], 'center', resultText1, white);
         Screen('Flip', wd);
@@ -73,7 +73,6 @@ for block = 1:numBlocks
             end
         end
         fixation
-        Screen('TextSize', wd, 40);
         WaitSecs (2);  %I think I have to change this
     end
     
@@ -86,9 +85,9 @@ for block = 1:numBlocks
         CurrentStim = 0; % Stimulus in this trial
         totalTrial = totalTrial +1;
         diamPosit_free = round(rand() + 1); %position of the diamonds if free consumption trial
-
         
-        %which trials will be free comsumption trials 
+        
+        %which trials will be free comsumption trials
         
         if trial == 13  ||  trial == 26 ||  trial == 39 ||  trial == 52
             CurrentStim = 5;
@@ -103,13 +102,11 @@ for block = 1:numBlocks
         %cue presentation
         cuepresentation
         
-        
-        
         if tooearly ==0
             %Start timing
             tStart = GetSecs;
             %Start response screen
-            while respToBeMade == 1 %esto quizás debiera ser de otro modo                
+            while respToBeMade == 1
                 %Drawing response options
                 if CurrentStim == 5
                     if diamPosit_free == 1
@@ -133,21 +130,21 @@ for block = 1:numBlocks
                 if keyCode (qKey) %lef hand
                     hand = 1;
                     if CurrentStim  == 1%HV1 for this cue the correct response is always q
-                            points = highPoints;
-                            response = 1; %"correct" response (the one leading to more points)
-                            respToBeMade = 0;         
+                        points = highPoints;
+                        response = 1; %"correct" response (the one leading to more points)
+                        respToBeMade = 0;
                     elseif CurrentStim == 2%HV2 for this cue the correct response is always p
-                            points = lowPoints;
-                            response = 0; %"incorrect" response 
-                            respToBeMade = 0;
+                        points = lowPoints;
+                        response = 0; %"incorrect" response
+                        respToBeMade = 0;
                     elseif CurrentStim == 3%LV1 for this cue the correct response is always q
-                            points = mediumPoints;
-                            response = 1;
-                            respToBeMade = 0;
+                        points = mediumPoints;
+                        response = 1;
+                        respToBeMade = 0;
                     elseif CurrentStim == 4%LV2 for this cue the correct response is always p
-                            points = lowPoints;
-                            response = 0;
-                            respToBeMade = 0;                            
+                        points = lowPoints;
+                        response = 0;
+                        respToBeMade = 0;
                     elseif CurrentStim == 5 %free consumption
                         if diamPosit_free == 1
                             points = highPoints;
@@ -162,21 +159,21 @@ for block = 1:numBlocks
                 elseif keyCode(pKey)%Right
                     hand = 2;
                     if CurrentStim  == 2%HV2 for this cue the correct response is always p
-                            points = highPoints;
-                            response = 1; %"correct" response (the one leading to more points)
-                            respToBeMade = 0;         
+                        points = highPoints;
+                        response = 1; %"correct" response (the one leading to more points)
+                        respToBeMade = 0;
                     elseif CurrentStim == 1%HV1 for this cue the correct response is always q
-                            points = lowPoints;
-                            response = 0; %"incorrect" response 
-                            respToBeMade = 0;
+                        points = lowPoints;
+                        response = 0; %"incorrect" response
+                        respToBeMade = 0;
                     elseif CurrentStim == 4%LV2 for this cue the correct response is always p
-                            points = mediumPoints;
-                            response = 1;
-                            respToBeMade = 0;
+                        points = mediumPoints;
+                        response = 1;
+                        respToBeMade = 0;
                     elseif CurrentStim == 3%LV2 for this cue the correct response is always q
-                            points = lowPoints;
-                            response = 0;
-                            respToBeMade = 0;                            
+                        points = lowPoints;
+                        response = 0;
+                        respToBeMade = 0;
                     elseif CurrentStim == 5 %free consumption
                         if diamPosit_free == 2
                             points = highPoints;
@@ -190,19 +187,28 @@ for block = 1:numBlocks
                     end
                 end
             end
-                        
+            
             tEnd = GetSecs;
-            rt = tEnd - tStart;            
+            rt = tEnd - tStart;
             
             %Draw nothing for 300 ms
             DrawFormattedText(wd, ' ', xCenter, yCenter, white);
-            vbl = Screen('Flip', wd);
+            Screen('Flip', wd);
             WaitSecs (0.3);
-            Screen('TextFont', wd, 'Arial');
-            Screen('TextSize', wd, 40);
             
-%FEEDBACK
-            if rt > 0.5
+            %FEEDBACK
+            % Response time limit will be different, depending on DATA.group. However,
+            % free consumption trials will be always with LowPressure.
+            if CurrentStim == 5
+                timeLimit = LowPressure;
+            else
+                if DATA.group ==1
+                    timeLimit = LowPressure;
+                elseif DATA.group ==2
+                    timeLimit = HighPressure;
+                end
+            end
+            if rt > timeLimit
                 points = 0;
                 response = 6;
                 DrawFormattedText(wd, ['¡Muy lento! Por favor, responde más rápido'], xfeedback1, yfeedback1, white);
@@ -216,13 +222,6 @@ for block = 1:numBlocks
                     Screen('Flip', wd);
                     WaitSecs (0.8);
                     numLV = numLV + 1;
-                    if counterBalancing(subjectCon,2) == 1
-                        numGreen = numGreen + 1;
-                    elseif counterBalancing(subjectCon,2) == 2
-                        numYell = numYell + 1;
-                    elseif counterBalancing(subjectCon,2) == 3
-                        numBlue = numBlue + 1;
-                    end
                     if blockType == 2 %blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation
                         DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
                     elseif blockType == 1
@@ -238,13 +237,6 @@ for block = 1:numBlocks
                     Screen('Flip', wd);
                     WaitSecs (0.8);
                     numHV = numHV + 1;
-                    if counterBalancing(subjectCon,2) == 2
-                        numGreen = numGreen + 1;
-                    elseif counterBalancing(subjectCon,2) == 3
-                        numYell = numYell + 1;
-                    elseif counterBalancing(subjectCon,2) == 1
-                        numBlue = numBlue + 1;
-                    end
                     if blockType == 1%blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation
                         points = 0;
                         DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
@@ -260,13 +252,6 @@ for block = 1:numBlocks
                     Screen('Flip', wd);
                     WaitSecs (0.8);
                     numMV = numMV + 1;
-                    if counterBalancing(subjectCon,2) == 3
-                        numGreen = numGreen + 1;
-                    elseif counterBalancing(subjectCon,2) == 1
-                        numYell = numYell + 1;
-                    elseif counterBalancing(subjectCon,2) == 2
-                        numBlue = numBlue + 1;
-                    end
                     if blockType == 2%blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation
                         points = 0;
                         DrawFormattedText(wd, '??', xfeedback2, yfeedback2);
@@ -283,11 +268,11 @@ for block = 1:numBlocks
                     Screen('Flip', wd);
                     WaitSecs (0.8);
                     DrawFormattedText(wd, ['+' int2str(points)], xfeedback2, yfeedback2, white);
-                    vbl = Screen('Flip', wd);
+                    Screen('Flip', wd);
                     WaitSecs (1.5);
                 end
             end
-            
+            totalPoints = points + totalPoints;
             DATA.trial_data(totalTrial, 1) = totalTrial;
             DATA.trial_data(totalTrial, 2) = block;
             DATA.trial_data(totalTrial, 3) = blockType; %1=high devaluated
@@ -319,59 +304,28 @@ for block = 1:numBlocks
             Screen('Flip', wd);
             WaitSecs (3);
         end
-%this bit is for the *summary* 
-%remember     %blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation.
-if blockType ==3
-        if counterBalancing(subjectCon,2) == 1
-            valueBlue = highPoints;
-            valueYell = mediumPoints;
-            valueGreen = lowPoints;
-        elseif counterBalancing(subjectCon,2) == 2
-            valueBlue = mediumPoints;
-            valueYell = lowPoints;
-            valueGreen = highPoints;
-        elseif counterBalancing(subjectCon,2) == 3
-            valueBlue = lowPoints;
-            valueYell = highPoints;
-            valueGreen = mediumPoints;
+        %this bit is for the *summary*
+        %remember     %blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation.
+        if blockType == 1
+            actualHVvalue = 0;
+            actualMVvalue = mediumPoints;
+            actualLVvalue = lowPoints;
+        elseif blockType == 2
+            actualHVvalue = highPoints;
+            actualMVvalue = 0;
+            actualLVvalue = lowPoints;
+        else
+            actualHVvalue = highPoints;
+            actualMVvalue = mediumPoints;
+            actualLVvalue = lowPoints;
         end
-elseif blockType ==2
-        if counterBalancing(subjectCon,2) == 1
-            valueBlue = highPoints;
-            valueYell = 0;
-            valueGreen = lowPoints;
-        elseif counterBalancing(subjectCon,2) == 2
-            valueBlue = 0;
-            valueYell = lowPoints;
-            valueGreen = highPoints;
-        elseif counterBalancing(subjectCon,2) == 3
-            valueBlue = lowPoints;
-            valueYell = highPoints;
-            valueGreen = 0;
-        end
-elseif blockType ==1
-        if counterBalancing(subjectCon,2) == 1
-            valueBlue = 0;
-            valueYell = mediumPoints;
-            valueGreen = lowPoints;
-        elseif counterBalancing(subjectCon,2) == 2
-            valueBlue = mediumPoints;
-            valueYell = lowPoints;
-            valueGreen = 0;
-        elseif counterBalancing(subjectCon,2) == 3
-            valueBlue = lowPoints;
-            valueYell = 0;
-            valueGreen = mediumPoints;
-        end
-end
         
-        Screen('TextFont', wd, 'Arial');
-        Screen('TextSize', wd, 40);   
+        
         
         
         
     end
-
+    
     summary
     
     
