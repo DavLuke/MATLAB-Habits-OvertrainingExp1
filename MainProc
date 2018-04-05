@@ -9,22 +9,22 @@ currentfolder=pwd;
 % slightly different BUT all the specifics depending on counterbalacing
 % will be constant for each participant.
 % IMPORTANT: For each session the NAME of the data file is going to change.
-% So data files will look like DATA_23_2 (first the subject, then the
-% session)
-Session = 1;
+% So data files will look like DATA_23_1_2 (first the subject, then the group
+% (time pressure) and then the session)
 
         DATA.sub = input('Introduce el número del participante ---> ');
+        DATA.group = input('¿Presión de tiempo (No=1/Sí=2)? ---> ');       
         DATA.ses = input('Introduce el número de sesión (1/2/3)  ---> ');
      Session = DATA.ses;
      if Session == 1
-        DATA.age = input('Please enter your age ---> ');
-        DATA.sex = input ('Please enter your gender (M/F) ---> ', 's'); 
-        DATA.hand = input ('Please enter your dominant hand (R/L) ---> ','s');
+        DATA.age = input('¿Cuántos años tienes (usa números)? ---> ');
+        DATA.sex = input ('¿Eres Hombre/Mujer/Otros(H/M/O)? ---> ', 's'); 
+        DATA.hand = input ('¿Eres Diestro o Zurdo (D/Z) ---> ','s');
      end
 % Check to see if subject data file already exists.
 if Session ~= 1
     previous_session = Session - 1;
-    fileName = ['DATA_', (num2str(previous_session)), '_', (num2str(DATA.sub)), '.mat'];
+    fileName = ['DATA_', (num2str(previous_session)), '_',(num2str(DATA.group)), '_', (num2str(DATA.sub)), '.mat'];
     if exist(fileName, 'file') == 0
          button = questdlg('No existe registro de este SUJETO de la Sesión anterior. ¿Estás seguro que quieres seguir?','Duplicate subj','Yes','No','No');
          switch button
@@ -39,8 +39,6 @@ end
 alienSetup
 
 distances
-
-
 
 %----------------------------------------------------------------------
 %                     EXPE information
@@ -61,7 +59,10 @@ lowPoints = 5;
 mediumPoints = 10;
 highPoints = 100;
 totalPoints = 0;
-varPoints = 3; %maximum variability in points = +-varPoints.
+
+% Time Pressure
+LowPressure = 2; %two seconds for responding.
+HighPressure = 0.5; %half a second for responding.
 
 %--------------------------Table for counterbalance---------------------
 counterBalancing_script
@@ -89,12 +90,12 @@ experiment
 
 save('DATA');
 
-while nextScreen == 0;
-    DrawFormattedText(wd, ['You have finished!!!'], 'center', resultText1, white);
-    DrawFormattedText(wd, ['Total points: ' int2str(totalPoints)],'center', resultText4, white);
+while nextScreen == 0
+    DrawFormattedText(wd, ['¡Has terminado!'], 'center', resultText1, white);
+    DrawFormattedText(wd, ['Puntos totales: ' int2str(totalPoints)],'center', resultText4, white);
     Screen('Flip', wd);    
     [keyIsDown, secs, keyCode] = KbCheck; %Check for response
-    if keyCode(escapeKey) & keyCode(spacebar);
+    if keyCode(escapeKey) & keyCode(spacebar)
         nextScreen = 1;
     end  
 end
