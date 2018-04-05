@@ -1,7 +1,28 @@
- Screen('DrawTexture', wd, instr1,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait;    
+%%IS NOT WORKING!! 
+ 
+ escapeKey = KbName('ESCAPE');
+spacebar = KbName('space');
+leftKey = KbName('LeftArrow');
+rightKey = KbName('RightArrow');
+InstrScreens = 0;
+% This is the cue which determines whether we exit the demo
+exitInstr = false;
 
+while exitInstr == false
+    [keyIsDown, secs, keyCode] = KbCheck;
+    if keyCode(escapeKey)
+        exitInstr = true;
+    elseif keyCode(leftKey)
+        InstrScreens = InstrScreens - 1;
+    elseif keyCode(rightKey)
+        InstrScreens = InstrScreens + 1;
+    end
+
+end
+    Screen('DrawTexture', wd, instr1,[], rect.stim{6});
+    Screen('Flip', wd);
+    WaitSecs(0.2);KbWait; 
+    
     Screen('DrawTexture', wd, instr2,[], rect.stim{6});
     Screen('Flip', wd);
     WaitSecs(0.2);KbWait; 
