@@ -16,11 +16,11 @@ currentfolder=pwd;
         DATA.group = input('¿Presión de tiempo (No=1/Sí=2)? ---> ');       
         DATA.ses = input('Introduce el número de sesión (1/2/3)  ---> ');
      Session = DATA.ses;
-     if Session == 1
-        DATA.age = input('¿Cuántos años tienes (usa números)? ---> ');
-        DATA.sex = input ('¿Eres Hombre/Mujer/Otros(H/M/O)? ---> ', 's'); 
-        DATA.hand = input ('¿Eres Diestro o Zurdo (D/Z) ---> ','s');
-     end
+%      if Session == 1
+%         DATA.age = input('¿Cuántos años tienes (usa números)? ---> ');
+%         DATA.sex = input ('¿Eres Hombre/Mujer/Otros(H/M/O)? ---> ', 's'); 
+%         DATA.hand = input ('¿Eres Diestro o Zurdo (D/Z) ---> ','s');
+%      end
 % Check to see if subject data file already exists.
 if Session ~= 1
     previous_session = Session - 1;
@@ -95,7 +95,7 @@ while nextScreen == 0
     DrawFormattedText(wd, ['Puntos totales: ' int2str(totalPoints)],'center', resultText4, white);
     Screen('Flip', wd);    
     [keyIsDown, secs, keyCode] = KbCheck; %Check for response
-    if keyCode(escapeKey) & keyCode(spacebar)
+    if keyCode(spacebar)
         nextScreen = 1;
     end  
 end
