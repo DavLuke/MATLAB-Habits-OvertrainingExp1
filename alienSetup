@@ -1,3 +1,6 @@
+% I have some problems with the vertical retrace. 
+Screen('Preference', 'SkipSyncTests', 1);
+
 % Setup PTB with some default values
 PsychDefaultSetup(2);
 
@@ -104,3 +107,4 @@ actualHVvalue = 0 ;
 actualMVvalue = 0 ;
 actualLVvalue = 0 ;
 timeLimit = 0;
+
