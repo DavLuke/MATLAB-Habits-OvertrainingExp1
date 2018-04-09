@@ -1,48 +1,43 @@
-%%IS NOT WORKING!! 
- 
- escapeKey = KbName('ESCAPE');
+escapeKey = KbName('ESCAPE');
 spacebar = KbName('space');
 leftKey = KbName('LeftArrow');
 rightKey = KbName('RightArrow');
+activeKeys = [leftKey rightKey escapeKey];
 InstrScreens = 0;
-% This is the cue which determines whether we exit the demo
+% restrict the keys for keyboard input to the keys we want
+RestrictKeysForKbCheck(activeKeys);
+% suppress echo to the command line for keypresses
+% ListenChar(2);
 exitInstr = false;
-
+insMatrix = [instr1, instr2, instr3, instr4, instr5, instr6, instr7, instr8];
+n=1;
+Screen('DrawTexture', wd, insMatrix(n),[], rect.stim{6});
+Screen('Flip', wd);
+WaitSecs(0.2);KbWait;
 while exitInstr == false
     [keyIsDown, secs, keyCode] = KbCheck;
     if keyCode(escapeKey)
         exitInstr = true;
     elseif keyCode(leftKey)
-        InstrScreens = InstrScreens - 1;
+        n=n-1;
+        if n < 1
+            n=1;
+        end
+        Screen('DrawTexture', wd, insMatrix(n),[], rect.stim{6});
+        Screen('Flip', wd);
+        WaitSecs(0.2);KbWait;
     elseif keyCode(rightKey)
-        InstrScreens = InstrScreens + 1;
+        n=n+1;
+        if n < 1
+            n=1;
+        elseif n > 8
+            n = 8;
+        end
+        Screen('DrawTexture', wd, insMatrix(n),[], rect.stim{6});
+        Screen('Flip', wd);
+        WaitSecs(0.2);KbWait;
     end
-
+    
 end
-    Screen('DrawTexture', wd, instr1,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait; 
-    
-    Screen('DrawTexture', wd, instr2,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait; 
-    
-    Screen('DrawTexture', wd, instr3,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait; 
-    
-    Screen('DrawTexture', wd, instr4,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait; 
-    
-    Screen('DrawTexture', wd, instr5,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait; 
-    
-    Screen('DrawTexture', wd, instr6,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait; 
-    
-    Screen('DrawTexture', wd, instr7,[], rect.stim{6});
-    Screen('Flip', wd);
-    WaitSecs(0.2);KbWait; 
+% reset the keyboard input checking for all keys
+RestrictKeysForKbCheck ([]);
