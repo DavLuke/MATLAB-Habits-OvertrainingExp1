@@ -101,5 +101,6 @@ instr6 = Screen('MakeTexture', wd, inst6);
 inst7Loc = [cd, filesep 'Instructions' filesep 'instr7.JPG'];
 inst7 = imread(inst7Loc);
 instr7 = Screen('MakeTexture', wd, inst7);
-
-
+inst8Loc = [cd, filesep 'Instructions' filesep 'instr8.JPG'];
+inst8 = imread(inst8Loc);
+instr8 = Screen('MakeTexture', wd, inst8);
