@@ -1,6 +1,6 @@
- %OK, first I will try to show just the text, and comment all related with the
+%OK, first I will try to show just the text, and comment all related with the
 %images. That's why there are many commented lines
-
+FlushEvents('keyDown')
 HVpoints = numHV * actualHVvalue ;
 MVpoints = numMV * actualMVvalue ;
 LVpoints = numLV * actualLVvalue ;
@@ -16,40 +16,79 @@ LVpoints = numLV * actualLVvalue ;
             colorHigh = 'Amarillos';
             colorMed = 'Morados';
             colorLow = 'Azules';
-        end
+       end
+exitSummary = false;
+while exitSummary == false
+   
+Puntostotales = Screen('TextBounds', wd, ['Puntos conseguidos por ahora ' int2str(totalPoints)]);
+xPuntostotales = (screenXpixels / 2) - (Puntostotales(3) / 2);
+yPuntostotales = (screenYpixels / 1.4) - (Puntostotales(4) / 2);
+DrawFormattedText(wd, ['Puntos conseguidos por ahora ' int2str(totalPoints)], xPuntostotales, yPuntostotales, white);
 
+if blockType == 1
 
-summary2 = Screen('TextBounds', wd, ['Has conseguido ' int2str(numMV) 'diamantes ' colorHigh ' . Estos diamantes valían ' actualMVvalue ' puntos, así que acumulas ' int2str( HVpoints) ' puntos adicionales.']);
-xsummary2 = (screenXpixels / 3) - (summary2(3) / 2);
-ysummary2 = (screenYpixels / 2) - (summary2(4) / 2);
+NumofDev = Screen('TextBounds', wd, ['Has obtenido  ' int2str(numHV) 'diamantes ' colorHigh]);
+xNumofDev = (screenXpixels / 2) - (NumofDev(3) / 2);
+yNumofDev = (screenYpixels / 2.3) - (NumofDev(4) / 2);
+DrawFormattedText(wd, ['Has obtenido  ' int2str(numHV) ' diamantes ' colorHigh], xNumofDev, yNumofDev, white);
 
+NumofDev1 = Screen('TextBounds', wd, ['Has obtenido 0 puntos de tus diamantes ' colorHigh]);
+xNumofDev1 = (screenXpixels / 2) - (NumofDev1(3) / 2);
+yNumofDev1 = (screenYpixels / 2) - (NumofDev1(4) / 2);
+DrawFormattedText(wd, ['Has obtenido 0 puntos de tus diamantes ' colorHigh], xNumofDev1, yNumofDev1, white);
 
-summary3 = Screen('TextBounds', wd, ['x ' int2str(numMV) ' x ' int2str(actualMVvalue) ' = ' int2str( MVpoints) ' points']);
-xsummary3 = (screenXpixels / 3) - (summary3(3) / 2);
-ysummary3 = (screenYpixels / 1.3) - (summary3(4) / 2);
+NumofDev2 = Screen('TextBounds', wd, ['En el futuro, evita ganar los diamantes que valgan 0 puntos ']);
+xNumofDev2 = (screenXpixels / 2) - (NumofDev2(3) / 2);
+yNumofDev2 = (screenYpixels / 1.7) - (NumofDev2(4) / 2);
+DrawFormattedText(wd, ['En el futuro, evita ganar los diamantes que valgan 0 puntos '], xNumofDev2, yNumofDev2, white);
 
-summary4 = Screen('TextBounds', wd, ['x ' int2str(numLV) ' x ' int2str(actualLVvalue) ' = ' int2str( LVpoints) ' points']);
-xsummary4 = (screenXpixels / 1.25) - (summary4(3) / 2);
-ysummary4 = (screenYpixels / 6) - (summary4(4) / 2);
+DevReminder = Screen('TextBounds', wd, ['Recuerda que los diamantes  ' colorHigh '¡¡valían 0 puntos!!']);
+xDevReminder = (screenXpixels / 2) - (DevReminder(3) / 2);
+yDevReminder = (screenYpixels / 2.6) - (DevReminder(4) / 2);
+DrawFormattedText(wd, ['Recuerda que los diamantes  ' colorHigh ' ¡¡valían 0 puntos!!'], xDevReminder, yDevReminder, white);
+DrawFormattedText(wd, ['Pulsa la barra espaciadora para continuar'], 'center', resultText5, white);
+Screen('Flip', wd);
 
-% HOW IT WORKed. This draws the HIGH and LOW diamond. The high always at the
-% upper position.
-% HOW it might work better. I draw the stimOut1tex, stimOut2tex and
-% stimOut3tex UP, MEDIUM and DOWN positions. I write the numbers of
-% diamonds and values using their dynamic name (not numBlue, instead,
-% "numHighValue"). The value is obviously striaghtforward. The only part of
-% the code that I should change depending on Blocktype is the text on top
-% saying that the "colour" is devalued,
-% *** All the things related with drawing the pictures are comented 
-%Screen('DrawTexture', wd, stimOut1tex, [], rect.stim{8} ); %high value diamond at the upper-left part of the screen
-%Screen('DrawTexture', wd, stimOut2tex, [], rect.stim{3} ); %medium value diamond at the centre-left part of the screen
-%Screen('DrawTexture', wd, stimOut3tex, [], rect.stim{7} ); %low value diamond at the bottom-left part of the screen
-%I should try to get the text at the centre, but at the same height than
-%the diamonds. numHV etc are variables that I haven't created yet. The
-%coordenates are all wrong at the moment.
+elseif blockType == 2
 
-DrawFormattedText(wd, ['Has conseguido ' int2str(numHV) 'diamantes ' colorHigh ' . Estos diamantes valían ' actualHVvalue ' puntos, así que acumulas ' int2str( HVpoints) ' puntos adicionales.'], xsummary2, ysummary2, white);
-% DrawFormattedText(wd, ['x ' int2str(numMV) ' x ' int2str(actualMVvalue) ' = ' int2str( MVpoints) ' points'], xsummary3, ysummary3, white);
-% DrawFormattedText(wd, ['x ' int2str(numLV) ' x ' int2str(actualLVvalue) ' = ' int2str( LVpoints) ' points'], xsummary4, ysummary4, white);
-Screen('Flip', wd); KbWait;
+NumofDev = Screen('TextBounds', wd, ['Has obtenido  ' int2str(numMV) 'diamantes ' colorMed]);
+xNumofDev = (screenXpixels / 2) - (NumofDev(3) / 2);
+yNumofDev = (screenYpixels / 2.3) - (NumofDev(4) / 2);
+DrawFormattedText(wd, ['Has obtenido  ' int2str(numMV) ' diamantes ' colorMed], xNumofDev, yNumofDev, white);
 
+NumofDev1 = Screen('TextBounds', wd, ['Has obtenido 0 puntos de tus diamantes ' colorMed]);
+xNumofDev1 = (screenXpixels / 2) - (NumofDev1(3) / 2);
+yNumofDev1 = (screenYpixels / 2) - (NumofDev1(4) / 2);
+DrawFormattedText(wd, ['Has obtenido 0 puntos de tus diamantes ' colorMed], xNumofDev1, yNumofDev1, white);
+
+NumofDev2 = Screen('TextBounds', wd, ['En el futuro, evita ganar los diamantes que valgan 0 puntos ']);
+xNumofDev2 = (screenXpixels / 2) - (NumofDev2(3) / 2);
+yNumofDev2 = (screenYpixels / 1.7) - (NumofDev2(4) / 2);
+DrawFormattedText(wd, ['En el futuro, evita ganar los diamantes que valgan 0 puntos '], xNumofDev2, yNumofDev2, white);
+
+DevReminder = Screen('TextBounds', wd, ['Recuerda que los diamantes  ' colorMed '¡¡valían 0 puntos!!']);
+xDevReminder = (screenXpixels / 2) - (DevReminder(3) / 2);
+yDevReminder = (screenYpixels / 2.6) - (DevReminder(4) / 2);
+DrawFormattedText(wd, ['Recuerda que los diamantes  ' colorMed ' ¡¡valían 0 puntos!!'], xDevReminder, yDevReminder, white);
+DrawFormattedText(wd, ['Pulsa la barra espaciadora para continuar'], 'center', resultText5, white);
+Screen('Flip', wd);
+
+elseif blockType == 3
+
+NumofDev2 = Screen('TextBounds', wd, ['En este bloque todos los diamantes conservaban su valor ']);
+xNumofDev2 = (screenXpixels / 2) - (NumofDev2(3) / 2);
+yNumofDev2 = (screenYpixels / 1.7) - (NumofDev2(4) / 2);
+DrawFormattedText(wd, ['En este bloque todos los diamantes conservaban su valor  '], xNumofDev2, yNumofDev2, white);
+DrawFormattedText(wd, ['Pulsa la barra espaciadora para continuar'], 'center', resultText5, white);
+Screen('Flip', wd);
+    
+end
+    [keyIsDown, secs, keyCode] = KbCheck;
+    if keyCode(spacebar)
+        exitSummary = true;
+    end
+    
+end
+numHV = 0;
+numMV = 0;
+numLV = 0;
