@@ -1,14 +1,14 @@
 %for each participant/session here we stablished the order of DevH and DevM
 %blocks.
-%DevOrder = 1 means that Block 3 is a DevH, Block 4 is a DevM;
-%Block 7 would be a DevM and the eighth a DevH.
-%DevOrder = 2 means that Block 4 is a DevH, Block 3 is a DevM;
-%Block 8 would be a DevM and the ninth a DevH.
+%DevOrder = 1 means that Block 4 is a DevH, Block 5 is a DevM;
+%Block 8 would be a DevM and the 9 a DevH.
+%DevOrder = 2 means that Block 5 is a DevH, Block 4 is a DevM;
+%Block 9 would be a DevM and the 8 a DevH.
 DevOrder = round(rand() + 1);
 exitExp = false;
 while exitExp == false
     
-    for block = 1:numBlocks
+    for block = 1:numBlocks 
         if exitExp == true
             break
         end
@@ -16,17 +16,17 @@ while exitExp == false
         %blockType = 1, High devaluated; =2, Med devalueated; = 3 no devaluation.
         
         if DevOrder == 1
-            if block == 3 || block == 8
+            if block == 4 || block == 9
                 blockType = 1;
-            elseif block == 4 || block == 7
+            elseif block == 5 || block == 8
                 blockType = 2;
             else
                 blockType = 3;
             end
         else
-            if block == 3 || block == 8
+            if block == 4 || block == 9
                 blockType = 2;
-            elseif block == 4 || block == 7
+            elseif block == 5 || block == 8
                 blockType = 1;
             else
                 blockType = 3;
@@ -73,8 +73,8 @@ while exitExp == false
                 DrawFormattedText(wd, ['Además hay interferencias: Verás "??" en lugar del valor de los diamantes. '], 'center', resultText4, white);
             end
         elseif blockType == 3
-            DrawFormattedText(wd, ['¡El mercado está al alza!'], 'center', resultText1, white);
-            DrawFormattedText(wd, ['Los diamantes AZUL, AMARILLO y MORADO recuperan su valor'], 'center', resultText2, white);
+            DrawFormattedText(wd, ['¡El mercado está normalizado!'], 'center', resultText1, white);
+            DrawFormattedText(wd, ['Los diamantes AZUL, AMARILLO y MORADO tienen su valor normal'], 'center', resultText2, white);
             DrawFormattedText(wd, [' Además no hay interferencias: Verás el valor de cada diamante conseguido. '], 'center', resultText4, white);
         end
         Screen('TextSize', wd, 20);
