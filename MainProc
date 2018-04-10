@@ -16,17 +16,17 @@ currentfolder=pwd;
         DATA.group = input('¿Presión de tiempo (No=1/Sí=2)? ---> ');       
         DATA.ses = input('Introduce el número de sesión (1/2/3)  ---> ');
      Session = DATA.ses;
-%      if Session == 1
-%         DATA.age = input('¿Cuántos años tienes (usa números)? ---> ');
-%         DATA.sex = input ('¿Eres Hombre/Mujer/Otros(H/M/O)? ---> ', 's'); 
-%         DATA.hand = input ('¿Eres Diestro o Zurdo (D/Z) ---> ','s');
-%      end
+     if Session == 1
+        DATA.age = input('¿Cuántos años tienes (usa números)? ---> ');
+        DATA.sex = input ('¿Eres Hombre/Mujer/Otros(H/M/O)? ---> ', 's'); 
+        DATA.hand = input ('¿Eres Diestro o Zurdo (D/Z) ---> ','s');
+     end
 % Check to see if subject data file already exists.
 if Session ~= 1
     previous_session = Session - 1;
     fileName = ['DATA_', (num2str(previous_session)), '_',(num2str(DATA.group)), '_', (num2str(DATA.sub)), '.mat'];
     if exist(fileName, 'file') == 0
-         button = questdlg('No existe registro de este SUJETO de la Sesión anterior. ¿Estás seguro que quieres seguir?','Duplicate subj','Yes','No','No');
+         button = questdlg('No existe registro de este SUJETO de la Sesión anterior. ¿Estás seguro que quieres seguir?','Error sujeto','Yes','No','No');
          switch button
                case 'Yes'
                    quit cancel;
@@ -47,7 +47,7 @@ distances
 
 % Define the trial-by-trial matrix
 trialsxblock = 48; %%4 cues x 12 trials (I am not including free election trials here)
-normalBlocks = 8;%30; %% it has be divisible by 3 (one normal block and two devaluated blocks)
+normalBlocks = 9;
 PreTrainingBlocks = 0;
 numBlocks = normalBlocks + PreTrainingBlocks;  
 numTrials = numBlocks*trialsxblock;
@@ -87,8 +87,8 @@ experiment
 
  nextScreen = 0;
  WaitSecs(0.25);
-
-save('DATA');
+    fileNamefinal = ['DATA_', (num2str(Session)), '_',(num2str(DATA.group)), '_', (num2str(DATA.sub)), '.mat'];
+save(fileNamefinal);
 
 while nextScreen == 0
     DrawFormattedText(wd, ['¡Has terminado!'], 'center', resultText1, white);
