@@ -1,5 +1,3 @@
-%DATA.counterBalancing = subjectCon; 
-
 %Load cues
 if counterBalancing(subjectCon,1) == 1
     stimCue1 = [cd, filesep 'Images' filesep 'Image1.png'];
